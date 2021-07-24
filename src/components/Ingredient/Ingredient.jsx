@@ -8,7 +8,7 @@ import stylesIngredient from './Ingredient.module.css';
 function Ingredient({ item }) {
   return (
     <div className={stylesIngredient.card}>
-      <img src={item.image} />
+      <img src={item.image} alt="Продукт" />
       <div className={stylesIngredient.price + ' mt-1'}>
         <p className="text text_type_digits-default">{item.price}</p>
         <CurrencyIcon type="primary" />

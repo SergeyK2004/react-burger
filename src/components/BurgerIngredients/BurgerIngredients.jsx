@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesBurgerIngredients from './BurgerIngredients.module.css';
 import Ingredient from '../Ingredient/Ingredient';
@@ -67,3 +68,15 @@ function BurgerIngredients({ data }) {
 }
 
 export default BurgerIngredients;
+
+BurgerIngredients.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      name: PropTypes.string,
+      price: PropTypes.number,
+      image: PropTypes.string,
+      type: PropTypes.string,
+    })
+  ),
+};

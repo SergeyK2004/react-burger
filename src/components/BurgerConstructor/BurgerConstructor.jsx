@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import stylesBurgerConstructor from './BurgerConstructor.module.css';
 import {
   CurrencyIcon,
@@ -6,9 +7,8 @@ import {
   Button,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import data from '../../utils/data.js';
 
-function BurgerConstructor(props) {
+function BurgerConstructor({ data }) {
   const burgerBun = data.find((item) => item.type === 'bun');
   return (
     <div className="mt-25 ml-4">
@@ -21,7 +21,7 @@ function BurgerConstructor(props) {
       />
       <div className={stylesBurgerConstructor.list + ' mt-4 mb-4 pr-4'}>
         {data.map((item) => (
-          <div className={stylesBurgerConstructor.burgerItem}>
+          <div className={stylesBurgerConstructor.burgerItem} key={item._id}>
             <DragIcon type="primary" />
             <ConstructorElement
               text={item.name}
@@ -60,3 +60,14 @@ function BurgerConstructor(props) {
 }
 
 export default BurgerConstructor;
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      name: PropTypes.string,
+      price: PropTypes.number,
+      image_mobile: PropTypes.string,
+    })
+  ),
+};

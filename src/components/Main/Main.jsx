@@ -14,7 +14,7 @@ function Main({ data }) {
         </h1>
         <BurgerIngredients data={data} />
       </div>
-      <BurgerConstructor />
+      <BurgerConstructor data={data} />
     </div>
   );
 }
