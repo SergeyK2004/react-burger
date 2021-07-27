@@ -7,7 +7,7 @@ import {
   Logo,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function AppHeader(props) {
+function AppHeader() {
   const [activeNav, setActiveNav] = React.useState('designer');
   return (
     <div className={stylesAppHeader.header}>
@@ -16,11 +16,10 @@ function AppHeader(props) {
           <a
             href="#"
             className={
-              activeNav === 'designer'
-                ? stylesAppHeader.menuItemActive +
-                  ' text text_type_main-default pl-5 pr-5 pb-4 pt-4 mr-2'
-                : stylesAppHeader.menuItem +
-                  ' text text_type_main-default pl-5 pr-5 pb-4 pt-4 mr-2'
+              (activeNav === 'designer'
+                ? stylesAppHeader.menuItemActive
+                : stylesAppHeader.menuItem) +
+              ' text text_type_main-default pl-5 pr-5 pb-4 pt-4 mr-2'
             }
           >
             <BurgerIcon
@@ -31,11 +30,10 @@ function AppHeader(props) {
           <a
             href="#"
             className={
-              activeNav === 'feed'
-                ? stylesAppHeader.menuItemActive +
-                  ' text text_type_main-default pl-5 pr-5 pb-4 pt-4 mr-2'
-                : stylesAppHeader.menuItem +
-                  ' text text_type_main-default pl-5 pr-5 pb-4 pt-4 mr-2'
+              (activeNav === 'feed'
+                ? stylesAppHeader.menuItemActive
+                : stylesAppHeader.menuItem) +
+              ' text text_type_main-default pl-5 pr-5 pb-4 pt-4 mr-2'
             }
           >
             <ListIcon type={activeNav === 'feed' ? 'primary' : 'secondary'} />
@@ -48,11 +46,10 @@ function AppHeader(props) {
         <a
           href="#"
           className={
-            activeNav === 'feed'
-              ? stylesAppHeader.menuItemActive +
-                ' text text_type_main-default pl-5 pr-5 pb-4 pt-4 mr-2'
-              : stylesAppHeader.menuItem +
-                ' text text_type_main-default pl-5 pr-5 pb-4 pt-4 mr-2'
+            (activeNav === 'feed'
+              ? stylesAppHeader.menuItemActive
+              : stylesAppHeader.menuItem) +
+            ' text text_type_main-default pl-5 pr-5 pb-4 pt-4 mr-2'
           }
         >
           <ProfileIcon type={activeNav === 'feed' ? 'primary' : 'secondary'} />

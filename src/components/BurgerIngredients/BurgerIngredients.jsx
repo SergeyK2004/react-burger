@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesBurgerIngredients from './BurgerIngredients.module.css';
 import Ingredient from '../Ingredient/Ingredient';
-
+import { typeOfIngredientsData } from '../../utils/const';
 function BurgerIngredients({ data }) {
   const [current, setCurrent] = React.useState('bun');
   const bunArray = data.filter((item) => item.type === 'bun');
@@ -33,7 +33,7 @@ function BurgerIngredients({ data }) {
         </p>
         <div className={stylesBurgerIngredients.chapter + ' mt-6 ml-4'}>
           {bunArray.map((item) => (
-            <Ingredient item={item} />
+            <Ingredient item={item} key={item._id} />
           ))}
         </div>
         <p
@@ -46,7 +46,7 @@ function BurgerIngredients({ data }) {
         </p>
         <div className={stylesBurgerIngredients.chapter + ' mt-6 ml-4'}>
           {sauceArray.map((item) => (
-            <Ingredient item={item} />
+            <Ingredient item={item} key={item._id} />
           ))}
         </div>
         <p
@@ -57,9 +57,9 @@ function BurgerIngredients({ data }) {
         >
           Начинки
         </p>
-        <div className={stylesBurgerIngredients.chapter + ' mt-6 ml-4'}>
+        <div className={`${stylesBurgerIngredients.chapter} mt-6 ml-4`}>
           {mainArray.map((item) => (
-            <Ingredient item={item} />
+            <Ingredient item={item} key={item._id} />
           ))}
         </div>
       </div>
@@ -70,13 +70,5 @@ function BurgerIngredients({ data }) {
 export default BurgerIngredients;
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string,
-      name: PropTypes.string,
-      price: PropTypes.number,
-      image: PropTypes.string,
-      type: PropTypes.string,
-    })
-  ),
+  data: PropTypes.arrayOf(typeOfIngredientsData),
 };

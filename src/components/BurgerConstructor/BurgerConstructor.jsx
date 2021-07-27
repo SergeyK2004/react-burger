@@ -7,6 +7,7 @@ import {
   Button,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { typeOfIngredientsData } from '../../utils/const';
 
 function BurgerConstructor({ data }) {
   const burgerBun = data.find((item) => item.type === 'bun');
@@ -16,7 +17,7 @@ function BurgerConstructor({ data }) {
         type="top"
         isLocked={true}
         text={burgerBun.name + ' (верх)'}
-        price={burgerBun.price / 2}
+        price={burgerBun.price}
         thumbnail={burgerBun.image_mobile}
       />
       <div className={stylesBurgerConstructor.list + ' mt-4 mb-4 pr-4'}>
@@ -36,7 +37,7 @@ function BurgerConstructor({ data }) {
         type="bottom"
         isLocked={true}
         text={burgerBun.name + ' (низ)'}
-        price={burgerBun.price / 2}
+        price={burgerBun.price}
         thumbnail={burgerBun.image_mobile}
       />
 
@@ -44,7 +45,7 @@ function BurgerConstructor({ data }) {
         <div className="mr-10">
           <p
             className={
-              stylesBurgerConstructor.summ + ' text text_type_digits-medium'
+              stylesBurgerConstructor.total + ' text text_type_digits-medium'
             }
           >
             610
@@ -62,12 +63,5 @@ function BurgerConstructor({ data }) {
 export default BurgerConstructor;
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string,
-      name: PropTypes.string,
-      price: PropTypes.number,
-      image_mobile: PropTypes.string,
-    })
-  ),
+  data: PropTypes.arrayOf(typeOfIngredientsData),
 };
