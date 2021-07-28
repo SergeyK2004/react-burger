@@ -13,13 +13,15 @@ function BurgerConstructor({ data }) {
   const burgerBun = data.find((item) => item.type === 'bun');
   return (
     <div className="mt-25 ml-4">
-      <ConstructorElement
-        type="top"
-        isLocked={true}
-        text={burgerBun.name + ' (верх)'}
-        price={burgerBun.price}
-        thumbnail={burgerBun.image_mobile}
-      />
+      {burgerBun && (
+        <ConstructorElement
+          type="top"
+          isLocked={true}
+          text={burgerBun.name + ' (верх)'}
+          price={burgerBun.price}
+          thumbnail={burgerBun.image_mobile}
+        />
+      )}
       <div className={stylesBurgerConstructor.list + ' mt-4 mb-4 pr-4'}>
         {data.map((item) => (
           <div className={stylesBurgerConstructor.burgerItem} key={item._id}>
@@ -33,14 +35,15 @@ function BurgerConstructor({ data }) {
         ))}
       </div>
 
-      <ConstructorElement
-        type="bottom"
-        isLocked={true}
-        text={burgerBun.name + ' (низ)'}
-        price={burgerBun.price}
-        thumbnail={burgerBun.image_mobile}
-      />
-
+      {burgerBun && (
+        <ConstructorElement
+          type="bottom"
+          isLocked={true}
+          text={burgerBun.name + ' (низ)'}
+          price={burgerBun.price}
+          thumbnail={burgerBun.image_mobile}
+        />
+      )}
       <div className={stylesBurgerConstructor.footer + '  mt-10'}>
         <div className="mr-10">
           <p
