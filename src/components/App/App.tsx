@@ -7,9 +7,16 @@ import Modal from '../Modal/Modal';
 
 function App() {
   const [data, setData] = useState([]);
-  const [modalIsOpen, setModalIsOpen] = React.useState(true);
+  const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [modalChild, setModalChild] = React.useState('');
+  const [modalHeader, setModalHeader] = React.useState('');
 
+  function onModalOpen(modalContent='', modalHeaderLabel='') {
+    setModalChild(modalContent);
+    setModalHeader(modalHeaderLabel);
+    setModalIsOpen(true);
+  }
+  
   function onModalClose() {
     setModalIsOpen(false);
   }
@@ -29,9 +36,9 @@ function App() {
   return (
     <div className="App">
       <AppHeader />
-      <Main data={data} />
+      <Main data={data} onModalOpen={onModalOpen}/>
       {modalIsOpen && 
-        <Modal onClose={onModalClose}>{modalChild}</Modal>}
+        <Modal onClose={onModalClose} header={modalHeader}>{modalChild}</Modal>}
     </div>
   );
 }

@@ -5,6 +5,7 @@
     align-items: center;
     max-width: 272px;
     flex: 1 1;
+    cursor: pointer;
 }
 
 .price {

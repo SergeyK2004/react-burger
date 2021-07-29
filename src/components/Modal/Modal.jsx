@@ -30,7 +30,9 @@ function Modal({ children, onClose, header = '' }) {
       <ModalOverlay onClick={onOverlayClick} />
       <div className={stylesModal.modal}>
         <div className={stylesModal.header + ' mt-10 mr-10 ml-10'}>
-          <h1 className={stylesModal.label}>{header}</h1>
+          <h1 className={stylesModal.label + ' text text_type_main-large'}>
+            {header}
+          </h1>
           <button className={stylesModal.buttonClose} onClick={onClose} />
         </div>
         <div className={stylesModal.children}>{children}</div>

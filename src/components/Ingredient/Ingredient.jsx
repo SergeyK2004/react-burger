@@ -6,10 +6,16 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesIngredient from './Ingredient.module.css';
 import { typeOfIngredientsData } from '../../utils/const';
+import IngredientDetails from '../IngredientDetails/IngredientDetails';
 
-function Ingredient({ item }) {
+function Ingredient({ item, onModalOpen }) {
+  function onClick() {
+    const modalChild = <IngredientDetails item={item} />;
+    const modalHeader = 'Детали ингредиента';
+    onModalOpen(modalChild, modalHeader);
+  }
   return (
-    <div className={stylesIngredient.card}>
+    <div className={stylesIngredient.card} onClick={onClick}>
       <img src={item.image} alt="Продукт" />
       <div className={stylesIngredient.price + ' mt-1'}>
         <p className="text text_type_digits-default">{item.price}</p>

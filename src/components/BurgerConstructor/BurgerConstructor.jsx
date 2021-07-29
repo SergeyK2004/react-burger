@@ -8,9 +8,16 @@ import {
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { typeOfIngredientsData } from '../../utils/const';
+import OrderDetails from '../OrderDetails/OrderDetails';
 
-function BurgerConstructor({ data }) {
+function BurgerConstructor({ data, onModalOpen }) {
   const burgerBun = data.find((item) => item.type === 'bun');
+  function onClick() {
+    const modalChild = <OrderDetails order={'034536'} />;
+    const modalHeader = '';
+    onModalOpen(modalChild, modalHeader);
+  }
+
   return (
     <div className="mt-25 ml-4">
       {burgerBun && (
@@ -55,7 +62,7 @@ function BurgerConstructor({ data }) {
           </p>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="medium">
+        <Button type="primary" size="medium" onClick={onClick}>
           Оформить заказ
         </Button>
       </div>

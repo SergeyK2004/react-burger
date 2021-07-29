@@ -41,4 +41,9 @@
 
 .label {
     flex: 1 0;
+    color: #F2F2F3;
+}
+
+.children {
+    margin: 0 auto;
 }

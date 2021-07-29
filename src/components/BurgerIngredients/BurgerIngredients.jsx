@@ -4,7 +4,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesBurgerIngredients from './BurgerIngredients.module.css';
 import Ingredient from '../Ingredient/Ingredient';
 import { typeOfIngredientsData } from '../../utils/const';
-function BurgerIngredients({ data }) {
+function BurgerIngredients({ data, onModalOpen }) {
   const [current, setCurrent] = React.useState('bun');
   const bunArray = data.filter((item) => item.type === 'bun');
   const mainArray = data.filter((item) => item.type === 'main');
@@ -33,7 +33,7 @@ function BurgerIngredients({ data }) {
         </p>
         <div className={stylesBurgerIngredients.chapter + ' mt-6 ml-4'}>
           {bunArray.map((item) => (
-            <Ingredient item={item} key={item._id} />
+            <Ingredient item={item} key={item._id} onModalOpen={onModalOpen} />
           ))}
         </div>
         <p
@@ -46,7 +46,7 @@ function BurgerIngredients({ data }) {
         </p>
         <div className={stylesBurgerIngredients.chapter + ' mt-6 ml-4'}>
           {sauceArray.map((item) => (
-            <Ingredient item={item} key={item._id} />
+            <Ingredient item={item} key={item._id} onModalOpen={onModalOpen} />
           ))}
         </div>
         <p
@@ -59,7 +59,7 @@ function BurgerIngredients({ data }) {
         </p>
         <div className={`${stylesBurgerIngredients.chapter} mt-6 ml-4`}>
           {mainArray.map((item) => (
-            <Ingredient item={item} key={item._id} />
+            <Ingredient item={item} key={item._id} onModalOpen={onModalOpen} />
           ))}
         </div>
       </div>
