@@ -71,4 +71,5 @@ export default BurgerIngredients;
 
 BurgerIngredients.propTypes = {
   data: PropTypes.arrayOf(typeOfIngredientsData),
+  onModalOpen: PropTypes.func,
 };

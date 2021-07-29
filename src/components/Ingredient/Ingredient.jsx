@@ -33,4 +33,5 @@ export default Ingredient;
 
 Ingredient.propTypes = {
   item: typeOfIngredientsData,
+  onModalOpen: PropTypes.func,
 };

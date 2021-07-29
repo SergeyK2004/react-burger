@@ -74,4 +74,5 @@ export default BurgerConstructor;
 
 BurgerConstructor.propTypes = {
   data: PropTypes.arrayOf(typeOfIngredientsData),
+  onModalOpen: PropTypes.func,
 };
