@@ -33,5 +33,5 @@ function OrderDetails({ order }) {
 export default OrderDetails;
 
 OrderDetails.propTypes = {
-  order: PropTypes.string,
+  order: PropTypes.string.isRequired,
 };

@@ -70,6 +70,6 @@ function BurgerIngredients({ data, onModalOpen }) {
 export default BurgerIngredients;
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(typeOfIngredientsData),
-  onModalOpen: PropTypes.func,
+  data: PropTypes.arrayOf(typeOfIngredientsData).isRequired,
+  onModalOpen: PropTypes.func.isRequired,
 };

@@ -24,6 +24,6 @@ function Main({ data, onModalOpen }) {
 export default Main;
 
 Main.propTypes = {
-  data: PropTypes.arrayOf(typeOfIngredientsData),
-  onModalOpen: PropTypes.func,
+  data: PropTypes.arrayOf(typeOfIngredientsData).isRequired,
+  onModalOpen: PropTypes.func.isRequired,
 };
