@@ -4,6 +4,7 @@ import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import { apiURL } from '../../utils/const';
 import Modal from '../Modal/Modal';
+import { BurgerIngredientsContext } from '../../services/burgerIngredientsContext';
 
 function App() {
   const [data, setData] = useState([]);
@@ -42,7 +43,9 @@ function App() {
   return (
     <div className={stylesApp.App}>
       <AppHeader />
-      <Main data={data} onModalOpen={onModalOpen} />
+      <BurgerIngredientsContext.Provider value={data}>
+        <Main data={data} onModalOpen={onModalOpen} />
+      </BurgerIngredientsContext.Provider>
       {modalIsOpen && (
         <Modal onClose={onModalClose} header={modalHeader}>
           {modalChild}

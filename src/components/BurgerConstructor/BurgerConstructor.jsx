@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import stylesBurgerConstructor from './BurgerConstructor.module.css';
 import {
@@ -9,14 +9,29 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { typeOfIngredientsData } from '../../utils/const';
 import OrderDetails from '../OrderDetails/OrderDetails';
+import { BurgerIngredientsContext } from '../../services/burgerIngredientsContext';
+const initialState = { total: 0 };
 
-function BurgerConstructor({ data, onModalOpen }) {
+function BurgerConstructor({ onModalOpen }) {
+  const data = useContext(BurgerIngredientsContext);
+
   const burgerBun = data.find((item) => item.type === 'bun');
+
+  const [stateTotal, dispatchTotal] = useReducer(reducer, initialState);
+
+  function reducer(state, action) {
+    const total = data.reduce((sum, item) => sum + item.price, 0);
+    return { total: total };
+  }
   function onClick() {
     const modalChild = <OrderDetails order={'034536'} />;
     const modalHeader = '';
     onModalOpen(modalChild, modalHeader);
   }
+
+  React.useEffect(() => {
+    dispatchTotal();
+  }, [data]);
 
   return (
     <div className="mt-25 ml-4">
@@ -30,16 +45,22 @@ function BurgerConstructor({ data, onModalOpen }) {
         />
       )}
       <div className={stylesBurgerConstructor.list + ' mt-4 mb-4 pr-4'}>
-        {data.map((item) => (
-          <div className={stylesBurgerConstructor.burgerItem} key={item._id}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text={item.name}
-              price={item.price}
-              thumbnail={item.image_mobile}
-            />
-          </div>
-        ))}
+        {data.map(
+          (item) =>
+            item.type !== 'bun' && (
+              <div
+                className={stylesBurgerConstructor.burgerItem}
+                key={item._id}
+              >
+                <DragIcon type="primary" />
+                <ConstructorElement
+                  text={item.name}
+                  price={item.price}
+                  thumbnail={item.image_mobile}
+                />
+              </div>
+            )
+        )}
       </div>
 
       {burgerBun && (
@@ -58,7 +79,7 @@ function BurgerConstructor({ data, onModalOpen }) {
               stylesBurgerConstructor.total + ' text text_type_digits-medium'
             }
           >
-            610
+            {stateTotal.total}
           </p>
           <CurrencyIcon type="primary" />
         </div>

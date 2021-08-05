@@ -16,7 +16,7 @@ function Main({ data, onModalOpen }) {
         </h1>
         <BurgerIngredients data={data} onModalOpen={onModalOpen} />
       </div>
-      <BurgerConstructor data={data} onModalOpen={onModalOpen} />
+      <BurgerConstructor onModalOpen={onModalOpen} />
     </div>
   );
 }
