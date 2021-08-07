@@ -44,7 +44,7 @@ function App() {
     <div className={stylesApp.App}>
       <AppHeader />
       <BurgerIngredientsContext.Provider value={data}>
-        <Main data={data} onModalOpen={onModalOpen} />
+        <Main onModalOpen={onModalOpen} />
       </BurgerIngredientsContext.Provider>
       {modalIsOpen && (
         <Modal onClose={onModalClose} header={modalHeader}>

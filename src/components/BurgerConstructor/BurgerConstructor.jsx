@@ -7,7 +7,6 @@ import {
   Button,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { typeOfIngredientsData } from '../../utils/const';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import { BurgerIngredientsContext } from '../../services/burgerIngredientsContext';
 import { apiOrderURL } from '../../utils/const';
