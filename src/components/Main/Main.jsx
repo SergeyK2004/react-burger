@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import stylesMain from './Main.module.css';
-import { typeOfIngredientsData } from '../../utils/const';
 
-function Main({ data, onModalOpen }) {
+function Main({ onModalOpen }) {
   return (
     <div className={stylesMain.main}>
       <div className="mr-10">
@@ -14,9 +13,9 @@ function Main({ data, onModalOpen }) {
         >
           Соберите бургер
         </h1>
-        <BurgerIngredients data={data} onModalOpen={onModalOpen} />
+        <BurgerIngredients onModalOpen={onModalOpen} />
       </div>
-      <BurgerConstructor data={data} onModalOpen={onModalOpen} />
+      <BurgerConstructor onModalOpen={onModalOpen} />
     </div>
   );
 }
@@ -24,6 +23,5 @@ function Main({ data, onModalOpen }) {
 export default Main;
 
 Main.propTypes = {
-  data: PropTypes.arrayOf(typeOfIngredientsData).isRequired,
   onModalOpen: PropTypes.func.isRequired,
 };
