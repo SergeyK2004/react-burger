@@ -1,6 +1,5 @@
 import React from 'react';
 import stylesIngredientDetails from './IngredientDetails.module.css';
-import { typeOfIngredientsData } from '../../utils/const';
 import { useSelector } from 'react-redux';
 
 function IngredientDetails() {
@@ -39,7 +38,3 @@ function IngredientDetails() {
 }
 
 export default IngredientDetails;
-
-IngredientDetails.propTypes = {
-  item: typeOfIngredientsData.isRequired,
-};

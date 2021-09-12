@@ -1,12 +1,9 @@
 import { apiURL } from '../../utils/const';
-import { LOAD_INGREDIENTS, ORDER_NUMBER } from './index';
+import { LOAD_INGREDIENTS, ORDER_NUMBER, ORDER_CLEAR } from './index';
 import { apiOrderURL } from '../../utils/const';
 
 export function getData() {
   return function (dispatch) {
-    // dispatch({
-    //   type: GET_ITEMS_REQUEST,
-    // });
     fetch(apiURL)
       .then((answer) => {
         if (answer.ok) {
@@ -27,17 +24,12 @@ export function getData() {
       .catch((error) => {
         console.log(error.message);
       });
-
-    // dispatch({
-    //   type: GET_ITEMS_FAILED,
-    // });
   };
 }
 
 export function postOrder(data) {
   return async function (dispatch) {
     const orderArray = data.map((item) => item._id);
-    console.log(orderArray);
     const response = await fetch(apiOrderURL, {
       method: 'POST',
       headers: {
@@ -59,12 +51,15 @@ export function postOrder(data) {
             type: ORDER_NUMBER,
             number: res.order.number,
           });
+          dispatch({
+            type: ORDER_CLEAR,
+          });
         } else {
           return Promise.reject(`Ошибка данных`);
         }
       })
       .catch((error) => {
-        return Promise.reject(error);
+        console.log(error.message);
       });
     return response;
   };

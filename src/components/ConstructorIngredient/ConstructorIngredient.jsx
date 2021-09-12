@@ -52,6 +52,7 @@ function ConstructorIngredient({ item, index, moveElement }) {
     dispatch({
       type: DELETE_INGREDIENT,
       item: item,
+      qnt: 1,
     });
   }
   const opacity = isDragging ? 0 : 1;

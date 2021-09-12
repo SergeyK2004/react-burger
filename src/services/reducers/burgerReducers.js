@@ -6,6 +6,7 @@ import {
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
   CHANGE_INGREDIENT,
+  ORDER_CLEAR,
 } from '../actions';
 
 const initialState = {
@@ -52,7 +53,9 @@ export const burgerReducer = (state = initialState, action) => {
           { ...action.item, constId: action.id },
         ],
         ingredients: [...state.ingredients].map((item) =>
-          item._id === action.item._id ? { ...item, count: ++item.count } : item
+          item._id === action.item._id
+            ? { ...item, count: item.count + action.qnt }
+            : item
         ),
       };
     case DELETE_INGREDIENT:
@@ -62,7 +65,9 @@ export const burgerReducer = (state = initialState, action) => {
           (item) => item.constId !== action.item.constId
         ),
         ingredients: [...state.ingredients].map((item) =>
-          item._id === action.item._id ? { ...item, count: --item.count } : item
+          item._id === action.item._id
+            ? { ...item, count: item.count - action.qnt }
+            : item
         ),
       };
     case CHANGE_INGREDIENT:
@@ -74,6 +79,15 @@ export const burgerReducer = (state = initialState, action) => {
       return {
         ...state,
         constructor: newConstructor,
+      };
+    case ORDER_CLEAR:
+      return {
+        ...state,
+        constructor: [],
+        ingredients: [...state.ingredients].map((item) => {
+          item['count'] = 0;
+          return item;
+        }),
       };
 
     // Реакция на прочие типы экшенов

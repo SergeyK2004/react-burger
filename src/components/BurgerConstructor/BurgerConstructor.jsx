@@ -31,12 +31,15 @@ function BurgerConstructor({ onModalOpen }) {
   });
 
   const onDropHandler = (item) => {
+    let qnt = 1;
     if (item.type === 'bun') {
+      qnt = 2;
       const bunElement = data.find((el) => el.type === 'bun');
       if (bunElement) {
         dispatch({
           type: DELETE_INGREDIENT,
           item: bunElement,
+          qnt: qnt,
         });
       }
     }
@@ -44,6 +47,7 @@ function BurgerConstructor({ onModalOpen }) {
       type: ADD_INGREDIENT,
       item: item,
       id: constId,
+      qnt: qnt,
     });
   };
   const burgerBun = data.find((item) => item.type === 'bun');
@@ -51,7 +55,10 @@ function BurgerConstructor({ onModalOpen }) {
   const [stateTotal, dispatchTotal] = useReducer(reducer, initialState);
 
   function reducer(state, action) {
-    const total = data.reduce((sum, item) => sum + item.price, 0);
+    const total = data.reduce(
+      (sum, item) => sum + (item.type === 'bun' ? item.price * 2 : item.price),
+      0
+    );
     return { total: total };
   }
   function onClick() {
@@ -70,7 +77,9 @@ function BurgerConstructor({ onModalOpen }) {
   React.useEffect(() => {
     dispatchTotal();
   }, [data]);
-
+  const inactiveButtonStyle = burgerBun
+    ? {}
+    : { opacity: 0.5, cursor: 'default' };
   return (
     <div ref={dropTarget} className="mt-25 ml-4">
       {burgerBun && (
@@ -116,7 +125,13 @@ function BurgerConstructor({ onModalOpen }) {
           </p>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="medium" onClick={onClick}>
+
+        <Button
+          type="primary"
+          size="medium"
+          style={inactiveButtonStyle}
+          {...(burgerBun && (onClick = { onClick }))}
+        >
           Оформить заказ
         </Button>
       </div>
