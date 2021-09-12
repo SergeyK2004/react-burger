@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesBurgerIngredients from './BurgerIngredients.module.css';
 import Ingredient from '../Ingredient/Ingredient';
-import { BurgerIngredientsContext } from '../../services/burgerIngredientsContext';
+import { useSelector, useDispatch } from 'react-redux';
 
 function BurgerIngredients({ onModalOpen }) {
-  const data = useContext(BurgerIngredientsContext);
+  const data = useSelector((store) => store.burgerReducer.ingredients);
   const [current, setCurrent] = React.useState('bun');
   const bunArray = data.filter((item) => item.type === 'bun');
   const mainArray = data.filter((item) => item.type === 'main');

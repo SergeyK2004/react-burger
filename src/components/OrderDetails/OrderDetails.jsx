@@ -2,8 +2,9 @@ import React from 'react';
 import stylesOrderDetails from './OrderDetails.module.css';
 import imageDone from '../../images/done.svg';
 import PropTypes from 'prop-types';
-
-function OrderDetails({ order }) {
+import { useSelector } from 'react-redux';
+function OrderDetails() {
+  const order = useSelector((store) => store.burgerReducer.order);
   return (
     <div className={stylesOrderDetails.bigCard}>
       <p className={stylesOrderDetails.order + ' text text_type_digits-large'}>
@@ -31,7 +32,3 @@ function OrderDetails({ order }) {
 }
 
 export default OrderDetails;
-
-OrderDetails.propTypes = {
-  order: PropTypes.number.isRequired,
-};

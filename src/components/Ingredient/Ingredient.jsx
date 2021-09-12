@@ -7,10 +7,17 @@ import {
 import stylesIngredient from './Ingredient.module.css';
 import { typeOfIngredientsData } from '../../utils/const';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import { useSelector, useDispatch } from 'react-redux';
+import { LOAD_DETAILS } from '../../services/actions/index';
 
 function Ingredient({ item, onModalOpen }) {
+  const dispatch = useDispatch();
   function onClick() {
-    const modalChild = <IngredientDetails item={item} />;
+    dispatch({
+      type: LOAD_DETAILS,
+      item: item,
+    });
+    const modalChild = <IngredientDetails />;
     const modalHeader = 'Детали ингредиента';
     onModalOpen(modalChild, modalHeader);
   }
