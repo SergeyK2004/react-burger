@@ -5,12 +5,41 @@ import stylesBurgerIngredients from './BurgerIngredients.module.css';
 import Ingredient from '../Ingredient/Ingredient';
 import { useSelector, useDispatch } from 'react-redux';
 
+const ingredientsWindow = document.querySelector('#ingredients');
+const bunElement = document.querySelector('#bun');
+const sauceElement = document.querySelector('#sauce');
+const mainElement = document.querySelector('#main');
+
 function BurgerIngredients({ onModalOpen }) {
   const data = useSelector((store) => store.burgerReducer.ingredients);
   const [current, setCurrent] = React.useState('bun');
   const bunArray = data.filter((item) => item.type === 'bun');
   const mainArray = data.filter((item) => item.type === 'main');
   const sauceArray = data.filter((item) => item.type === 'sauce');
+
+  const scrollListener = (evt) => {
+    // Посчитаем расстояние до каждого раздела
+    const bunLength = Math.abs(
+      ingredientsWindow.getBoundingClientRect().top -
+        bunElement.getBoundingClientRect().top
+    );
+    const sauceLength = Math.abs(
+      ingredientsWindow.getBoundingClientRect().top -
+        sauceElement.getBoundingClientRect().top
+    );
+    const mainLength = Math.abs(
+      ingredientsWindow.getBoundingClientRect().top -
+        mainElement.getBoundingClientRect().top
+    );
+    const rightTabLength = Math.min(bunLength, sauceLength, mainLength);
+    setCurrent(
+      bunLength === rightTabLength
+        ? 'bun'
+        : sauceLength === rightTabLength
+        ? 'sauce'
+        : 'main'
+    );
+  };
   return (
     <section className={stylesBurgerIngredients.section}>
       <div className={stylesBurgerIngredients.tab}>
@@ -24,8 +53,13 @@ function BurgerIngredients({ onModalOpen }) {
           Начинки
         </Tab>
       </div>
-      <div className={stylesBurgerIngredients.ingredients}>
+      <div
+        id="ingredients"
+        onScroll={scrollListener}
+        className={stylesBurgerIngredients.ingredients}
+      >
         <p
+          id="bun"
           className={
             stylesBurgerIngredients.chapterLabel +
             ' mt-10 text text_type_main-medium'
@@ -39,6 +73,7 @@ function BurgerIngredients({ onModalOpen }) {
           ))}
         </div>
         <p
+          id="sauce"
           className={
             stylesBurgerIngredients.chapterLabel +
             ' mt-10 text text_type_main-medium'
@@ -52,6 +87,7 @@ function BurgerIngredients({ onModalOpen }) {
           ))}
         </div>
         <p
+          id="main"
           className={
             stylesBurgerIngredients.chapterLabel +
             ' mt-10 text text_type_main-medium'
