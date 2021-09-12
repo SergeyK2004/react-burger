@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import stylesApp from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import Modal from '../Modal/Modal';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getData } from '../../services/actions/burgerActions';
 import { DELETE_DETAILS } from '../../services/actions';
 
@@ -11,8 +11,6 @@ function App() {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [modalChild, setModalChild] = React.useState('');
   const [modalHeader, setModalHeader] = React.useState('');
-
-  const data = useSelector((store) => store.burgerReducer.ingredients);
 
   const dispatch = useDispatch();
 

@@ -1,11 +1,11 @@
 import {
   LOAD_INGREDIENTS,
   LOAD_DETAILS,
-  LOAD_CONSTRUCTOR,
   DELETE_DETAILS,
   ORDER_NUMBER,
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
+  CHANGE_INGREDIENT,
 } from '../actions';
 
 const initialState = {
@@ -64,6 +64,16 @@ export const burgerReducer = (state = initialState, action) => {
         ingredients: [...state.ingredients].map((item) =>
           item._id === action.item._id ? { ...item, count: --item.count } : item
         ),
+      };
+    case CHANGE_INGREDIENT:
+      const newConstructor = [...state.constructor];
+      const dragIngredient = newConstructor[action.dragIndex];
+      newConstructor.splice(action.dragIndex, 1);
+      newConstructor.splice(action.hoverIndex, 0, dragIngredient);
+
+      return {
+        ...state,
+        constructor: newConstructor,
       };
 
     // Реакция на прочие типы экшенов

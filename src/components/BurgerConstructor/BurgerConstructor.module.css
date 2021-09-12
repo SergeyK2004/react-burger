@@ -15,12 +15,6 @@
     background-color: #8585ad;
 }
 
-.burgerItem {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
 .footer {
     display: flex;
     flex-direction: row;

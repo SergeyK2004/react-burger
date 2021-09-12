@@ -1,7 +1,6 @@
 import React from 'react';
 import stylesOrderDetails from './OrderDetails.module.css';
 import imageDone from '../../images/done.svg';
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 function OrderDetails() {
   const order = useSelector((store) => store.burgerReducer.order);

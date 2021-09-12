@@ -7,7 +7,7 @@ import {
 import stylesIngredient from './Ingredient.module.css';
 import { typeOfIngredientsData } from '../../utils/const';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { LOAD_DETAILS } from '../../services/actions/index';
 import { useDrag } from 'react-dnd';
 

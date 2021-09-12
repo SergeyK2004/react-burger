@@ -5,13 +5,17 @@ import {
   CurrencyIcon,
   ConstructorElement,
   Button,
-  DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import { useSelector, useDispatch } from 'react-redux';
 import { postOrder } from '../../services/actions/burgerActions';
 import { useDrop } from 'react-dnd';
-import { ADD_INGREDIENT, DELETE_INGREDIENT } from '../../services/actions';
+import {
+  ADD_INGREDIENT,
+  CHANGE_INGREDIENT,
+  DELETE_INGREDIENT,
+} from '../../services/actions';
+import ConstructorIngredient from '../ConstructorIngredient/ConstructorIngredient';
 const initialState = { total: 0 };
 
 function BurgerConstructor({ onModalOpen }) {
@@ -50,19 +54,19 @@ function BurgerConstructor({ onModalOpen }) {
     const total = data.reduce((sum, item) => sum + item.price, 0);
     return { total: total };
   }
-  function deleteElement(item) {
-    dispatch({
-      type: DELETE_INGREDIENT,
-      item: item,
-    });
-  }
   function onClick() {
     dispatch(postOrder(data));
     const modalChild = <OrderDetails />;
     const modalHeader = '';
     onModalOpen(modalChild, modalHeader);
   }
-
+  function moveElement(dragIndex, hoverIndex) {
+    dispatch({
+      type: CHANGE_INGREDIENT,
+      dragIndex: dragIndex,
+      hoverIndex: hoverIndex,
+    });
+  }
   React.useEffect(() => {
     dispatchTotal();
   }, [data]);
@@ -80,20 +84,14 @@ function BurgerConstructor({ onModalOpen }) {
       )}
       <div className={stylesBurgerConstructor.list + ' mt-4 mb-4 pr-4'}>
         {data.map(
-          (item) =>
-            item.type !== 'bun' && (
-              <div
-                className={stylesBurgerConstructor.burgerItem}
-                key={item.constId}
-              >
-                <DragIcon type="primary" />
-                <ConstructorElement
-                  handleClose={() => deleteElement(item)}
-                  text={item.name}
-                  price={item.price}
-                  thumbnail={item.image_mobile}
-                />
-              </div>
+          (el, index) =>
+            el.type !== 'bun' && (
+              <ConstructorIngredient
+                item={el}
+                index={index}
+                key={el.constId}
+                moveElement={moveElement}
+              />
             )
         )}
       </div>

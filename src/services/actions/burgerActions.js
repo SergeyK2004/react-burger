@@ -1,7 +1,6 @@
 import { apiURL } from '../../utils/const';
 import { LOAD_INGREDIENTS, ORDER_NUMBER } from './index';
 import { apiOrderURL } from '../../utils/const';
-import { useSelector } from 'react-redux';
 
 export function getData() {
   return function (dispatch) {
