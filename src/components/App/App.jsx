@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import stylesApp from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
-import { apiURL } from '../../utils/const';
 import Modal from '../Modal/Modal';
-import { BurgerIngredientsContext } from '../../services/burgerIngredientsContext';
+import { useDispatch } from 'react-redux';
+import { getData } from '../../services/actions/burgerActions';
+import { DELETE_DETAILS } from '../../services/actions';
 
 function App() {
-  const [data, setData] = useState([]);
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [modalChild, setModalChild] = React.useState('');
   const [modalHeader, setModalHeader] = React.useState('');
+
+  const dispatch = useDispatch();
 
   function onModalOpen(modalContent, modalHeaderLabel = '') {
     setModalChild(modalContent);
@@ -20,32 +22,18 @@ function App() {
 
   function onModalClose() {
     setModalIsOpen(false);
+    dispatch({
+      type: DELETE_DETAILS,
+    });
   }
   useEffect(() => {
-    fetch(apiURL)
-      .then((answer) => {
-        if (answer.ok) {
-          return answer.json();
-        }
-        return Promise.reject(`Ошибка ${answer.status}`);
-      })
-      .then((answer) => {
-        if (answer.success) {
-          setData(answer.data);
-        } else {
-          return Promise.reject(`Ошибка данных`);
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  }, []);
+    dispatch(getData());
+  }, [dispatch]);
+
   return (
     <div className={stylesApp.App}>
       <AppHeader />
-      <BurgerIngredientsContext.Provider value={data}>
-        <Main onModalOpen={onModalOpen} />
-      </BurgerIngredientsContext.Provider>
+      <Main onModalOpen={onModalOpen} />
       {modalIsOpen && (
         <Modal onClose={onModalClose} header={modalHeader}>
           {modalChild}

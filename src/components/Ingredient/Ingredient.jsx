@@ -7,15 +7,27 @@ import {
 import stylesIngredient from './Ingredient.module.css';
 import { typeOfIngredientsData } from '../../utils/const';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import { useDispatch } from 'react-redux';
+import { LOAD_DETAILS } from '../../services/actions/index';
+import { useDrag } from 'react-dnd';
 
 function Ingredient({ item, onModalOpen }) {
+  const dispatch = useDispatch();
   function onClick() {
-    const modalChild = <IngredientDetails item={item} />;
+    dispatch({
+      type: LOAD_DETAILS,
+      item: item,
+    });
+    const modalChild = <IngredientDetails />;
     const modalHeader = 'Детали ингредиента';
     onModalOpen(modalChild, modalHeader);
   }
+  const [, dragRef] = useDrag({
+    type: 'ingredient',
+    item: item,
+  });
   return (
-    <div className={stylesIngredient.card} onClick={onClick}>
+    <div ref={dragRef} className={stylesIngredient.card} onClick={onClick}>
       <img src={item.image} alt="Продукт" />
       <div className={stylesIngredient.price + ' mt-1'}>
         <p className="text text_type_digits-default">{item.price}</p>
@@ -23,7 +35,7 @@ function Ingredient({ item, onModalOpen }) {
       </div>
       <p className="text text_type_main-default mt-1">{item.name}</p>
       <div className={stylesIngredient.counter}>
-        <Counter count={1} size="default" />
+        {item.count > 0 && <Counter count={item.count} size="default" />}
       </div>
     </div>
   );
