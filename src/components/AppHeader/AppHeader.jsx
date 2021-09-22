@@ -42,14 +42,15 @@ function AppHeader() {
         </div>
         <div className={stylesAppHeader.logo}>
           <Logo />
-        </div>
+        </div>{' '}
         <a
           href="#"
           className={
             (activeNav === 'feed'
               ? stylesAppHeader.menuItemActive
               : stylesAppHeader.menuItem) +
-            ' text text_type_main-default pl-5 pr-5 pb-4 pt-4 mr-2'
+            ' text text_type_main-default pl-5 pr-5 pb-4 pt-4 mr-2 ' +
+            stylesAppHeader.menuItemLs
           }
         >
           <ProfileIcon type={activeNav === 'feed' ? 'primary' : 'secondary'} />

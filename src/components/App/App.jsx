@@ -6,6 +6,7 @@ import Modal from '../Modal/Modal';
 import { useDispatch } from 'react-redux';
 import { getData } from '../../services/actions/burgerActions';
 import { DELETE_DETAILS } from '../../services/actions';
+import Login from '../pages/Login/Login';
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
@@ -33,12 +34,13 @@ function App() {
   return (
     <div className={stylesApp.App}>
       <AppHeader />
-      <Main onModalOpen={onModalOpen} />
+      <Login />
+      {/* <Main onModalOpen={onModalOpen} />
       {modalIsOpen && (
         <Modal onClose={onModalClose} header={modalHeader}>
           {modalChild}
-        </Modal>
-      )}
+        </Modal> */}
+      {/* )} */}
     </div>
   );
 }
