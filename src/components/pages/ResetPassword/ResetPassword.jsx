@@ -5,11 +5,11 @@ import {
   Button,
   EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import stylesLogin from './Login.module.css';
+import stylesResetPassword from './ResetPassword.module.css';
 import stylesGlobal from '../../../utils/global.module.css';
 
-function Login() {
-  const [form, setValue] = useState({ name: '', email: '', password: '' });
+function ResetPassword() {
+  const [form, setValue] = useState({ code: '', password: '' });
 
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
@@ -27,46 +27,41 @@ function Login() {
     <div className={stylesLogin.main}>
       <form className={stylesLogin.form + ' mb-20'}>
         <h1 className={stylesLogin.heading + ' text text_type_main-large mb-6'}>
-          Вход
+          Восстановление пароля
         </h1>
         <div className={'mb-6'}>
-          <EmailInput value={form.email} name="Логин" onChange={onChange} />
-        </div>
-        <div className={'mb-6'}>
           <PasswordInput
+            placeholder="Введите новый пароль"
             value={form.password}
             name="password"
             onChange={onChange}
           />
         </div>
+        <div className={'mb-6'}>
+          <Input
+            placeholder="Введите код из письма"
+            value={form.code}
+            name="code"
+            onChange={onChange}
+          />
+        </div>
         <Button onClick={login} primary={true}>
-          Войти
+          Сохранить
         </Button>
       </form>
       <div className={stylesLogin.footerLine}>
         <p className={'text text_type_main-default text_color_inactive'}>
-          Вы — новый пользователь?
+          Уже зарегистрированы?
         </p>
         <a
           href="#"
           className={stylesGlobal.link + ' text text_type_main-default ml-2'}
         >
-          Зарегистрироваться
-        </a>
-      </div>
-      <div className={stylesLogin.footerLine + ' mt-4'}>
-        <p className="text text_type_main-default text_color_inactive">
-          Забыли пароль?
-        </p>
-        <a
-          href="#"
-          className={stylesGlobal.link + ' text text_type_main-default ml-2'}
-        >
-          Восстановить пароль
+          Войти
         </a>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default ResetPassword;

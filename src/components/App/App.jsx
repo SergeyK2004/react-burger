@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { getData } from '../../services/actions/burgerActions';
 import { DELETE_DETAILS } from '../../services/actions';
 import Login from '../pages/Login/Login';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
