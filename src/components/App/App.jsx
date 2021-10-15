@@ -10,6 +10,7 @@ import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword/ResetPassword';
+import Profile from '../pages/Profile/Profile';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 function App() {
@@ -37,9 +38,9 @@ function App() {
 
   return (
     <div className={stylesApp.App}>
-      <AppHeader />
       <Router>
         <Route path="/" exact>
+          <AppHeader />
           <Main onModalOpen={onModalOpen} />
           {modalIsOpen && (
             <Modal onClose={onModalClose} header={modalHeader}>
@@ -48,16 +49,24 @@ function App() {
           )}
         </Route>
         <Route path="/login">
+          <AppHeader />
           <Login />
         </Route>
         <Route path="/register">
+          <AppHeader />
           <Register />
         </Route>
         <Route path="/forgot-password">
+          <AppHeader />
           <ForgotPassword />
         </Route>
         <Route path="/reset-password">
+          <AppHeader />
           <ResetPassword />
+        </Route>
+        <Route path="/profile">
+          <AppHeader />
+          <Profile />
         </Route>
       </Router>
     </div>
