@@ -7,26 +7,42 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesResetPassword from './ResetPassword.module.css';
 import stylesGlobal from '../../../utils/global.module.css';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { resetPassword } from '../../../utils/auth';
 
 function ResetPassword() {
   const [form, setValue] = useState({ code: '', password: '' });
+  const history = useHistory();
 
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
-  let login = useCallback(
+  let passwordCreate = useCallback(
     (e) => {
       e.preventDefault();
-      //   auth.signIn(form);
+      resetPassword(form.password, form.code)
+        .then((data) => {
+          if (data.success) {
+            history.replace({ pathname: '/' });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     [form]
   );
 
   return (
-    <div className={stylesLogin.main}>
-      <form className={stylesLogin.form + ' mb-20'}>
-        <h1 className={stylesLogin.heading + ' text text_type_main-large mb-6'}>
+    <div className={stylesResetPassword.main}>
+      <form className={stylesResetPassword.form + ' mb-20'}>
+        <h1
+          className={
+            stylesResetPassword.heading + ' text text_type_main-large mb-6'
+          }
+        >
           Восстановление пароля
         </h1>
         <div className={'mb-6'}>
@@ -45,20 +61,20 @@ function ResetPassword() {
             onChange={onChange}
           />
         </div>
-        <Button onClick={login} primary={true}>
+        <Button onClick={passwordCreate} primary={true}>
           Сохранить
         </Button>
       </form>
-      <div className={stylesLogin.footerLine}>
+      <div className={stylesResetPassword.footerLine}>
         <p className={'text text_type_main-default text_color_inactive'}>
           Уже зарегистрированы?
         </p>
-        <a
-          href="#"
+        <Link
+          to="/login"
           className={stylesGlobal.link + ' text text_type_main-default ml-2'}
         >
           Войти
-        </a>
+        </Link>
       </div>
     </div>
   );

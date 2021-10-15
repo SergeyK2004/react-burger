@@ -7,45 +7,65 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesForgotPassword from './ForgotPassword.module.css';
 import stylesGlobal from '../../../utils/global.module.css';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { forgotPassword } from '../../../utils/auth';
 
 function ForgotPassword() {
   const [form, setValue] = useState({ name: '', email: '', password: '' });
-
+  const history = useHistory();
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
-  let login = useCallback(
+  let passwordReset = useCallback(
     (e) => {
       e.preventDefault();
-      //   auth.signIn(form);
+      forgotPassword(form.email)
+        .then((data) => {
+          if (data.success) {
+            history.replace({ pathname: '/reset-password' });
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     },
     [form]
   );
 
   return (
-    <div className={stylesLogin.main}>
-      <form className={stylesLogin.form + ' mb-20'}>
-        <h1 className={stylesLogin.heading + ' text text_type_main-large mb-6'}>
+    <div className={stylesForgotPassword.main}>
+      <form className={stylesForgotPassword.form + ' mb-20'}>
+        <h1
+          className={
+            stylesForgotPassword.heading + ' text text_type_main-large mb-6'
+          }
+        >
           Восстановление пароля
         </h1>
         <div className={'mb-6'}>
-          <EmailInput value={form.email} name="Логин" onChange={onChange} />
+          <EmailInput
+            value={form.email}
+            name="email"
+            placeholder="Укажите e-mail"
+            onChange={onChange}
+          />
         </div>
-        <Button onClick={login} primary={true}>
+        <Button onClick={passwordReset} primary={true}>
           Восстановить
         </Button>
       </form>
-      <div className={stylesLogin.footerLine}>
+      <div className={stylesForgotPassword.footerLine}>
         <p className={'text text_type_main-default text_color_inactive'}>
           Вспомнили пароль?
         </p>
-        <a
-          href="#"
+        <Link
+          to="/login"
           className={stylesGlobal.link + ' text text_type_main-default ml-2'}
         >
           Войти
-        </a>
+        </Link>
       </div>
     </div>
   );

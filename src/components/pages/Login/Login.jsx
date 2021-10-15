@@ -7,6 +7,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesLogin from './Login.module.css';
 import stylesGlobal from '../../../utils/global.module.css';
+import { Link } from 'react-router-dom';
 
 function Login() {
   const [form, setValue] = useState({ name: '', email: '', password: '' });
@@ -47,23 +48,23 @@ function Login() {
         <p className={'text text_type_main-default text_color_inactive'}>
           Вы — новый пользователь?
         </p>
-        <a
-          href="#"
+        <Link
+          to="/register"
           className={stylesGlobal.link + ' text text_type_main-default ml-2'}
         >
           Зарегистрироваться
-        </a>
+        </Link>
       </div>
       <div className={stylesLogin.footerLine + ' mt-4'}>
         <p className="text text_type_main-default text_color_inactive">
           Забыли пароль?
         </p>
-        <a
-          href="#"
+        <Link
+          to="/forgot-password"
           className={stylesGlobal.link + ' text text_type_main-default ml-2'}
         >
           Восстановить пароль
-        </a>
+        </Link>
       </div>
     </div>
   );

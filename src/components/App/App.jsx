@@ -7,6 +7,9 @@ import { useDispatch } from 'react-redux';
 import { getData } from '../../services/actions/burgerActions';
 import { DELETE_DETAILS } from '../../services/actions';
 import Login from '../pages/Login/Login';
+import Register from '../pages/Register/Register';
+import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
+import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 function App() {
@@ -35,13 +38,28 @@ function App() {
   return (
     <div className={stylesApp.App}>
       <AppHeader />
-      <Login />
-      {/* <Main onModalOpen={onModalOpen} />
-      {modalIsOpen && (
-        <Modal onClose={onModalClose} header={modalHeader}>
-          {modalChild}
-        </Modal> */}
-      {/* )} */}
+      <Router>
+        <Route path="/" exact>
+          <Main onModalOpen={onModalOpen} />
+          {modalIsOpen && (
+            <Modal onClose={onModalClose} header={modalHeader}>
+              {modalChild}
+            </Modal>
+          )}
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/forgot-password">
+          <ForgotPassword />
+        </Route>
+        <Route path="/reset-password">
+          <ResetPassword />
+        </Route>
+      </Router>
     </div>
   );
 }

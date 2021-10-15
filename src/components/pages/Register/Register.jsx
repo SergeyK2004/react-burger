@@ -7,6 +7,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesRegister from './Register.module.css';
 import stylesGlobal from '../../../utils/global.module.css';
+import { Link } from 'react-router-dom';
 
 function Register() {
   const [form, setValue] = useState({ name: '', email: '', password: '' });
@@ -24,21 +25,23 @@ function Register() {
   );
 
   return (
-    <div className={stylesLogin.main}>
-      <form className={stylesLogin.form + ' mb-20'}>
-        <h1 className={stylesLogin.heading + ' text text_type_main-large mb-6'}>
+    <div className={stylesRegister.main}>
+      <form className={stylesRegister.form + ' mb-20'}>
+        <h1
+          className={stylesRegister.heading + ' text text_type_main-large mb-6'}
+        >
           Регистрация
         </h1>
         <div className={'mb-6'}>
           <Input
-            placeholder="Name"
+            placeholder="Имя"
             value={form.name}
-            name="Имя"
+            name="name"
             onChange={onChange}
           />
         </div>
         <div className={'mb-6'}>
-          <EmailInput value={form.email} name="Логин" onChange={onChange} />
+          <EmailInput value={form.email} name="email" onChange={onChange} />
         </div>
         <div className={'mb-6'}>
           <PasswordInput
@@ -51,16 +54,16 @@ function Register() {
           Зарегистрироваться
         </Button>
       </form>
-      <div className={stylesLogin.footerLine}>
+      <div className={stylesRegister.footerLine}>
         <p className={'text text_type_main-default text_color_inactive'}>
           Уже зарегистрированы?
         </p>
-        <a
-          href="#"
+        <Link
+          to="/login"
           className={stylesGlobal.link + ' text text_type_main-default ml-2'}
         >
           Войти
-        </a>
+        </Link>
       </div>
     </div>
   );
