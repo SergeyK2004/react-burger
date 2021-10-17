@@ -1,9 +1,8 @@
 import React from 'react';
 import stylesIngredientDetails from './IngredientDetails.module.css';
-import { useSelector } from 'react-redux';
 
-function IngredientDetails() {
-  const item = useSelector((store) => store.burgerReducer.ingredient);
+function IngredientDetails({ item }) {
+  // const item = useSelector((store) => store.burgerReducer.ingredient);
   return (
     <div className={stylesIngredientDetails.bigCard}>
       <img src={item.image_large} alt="Ингредиент" className="mr-5 ml-5" />

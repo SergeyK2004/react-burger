@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   PasswordInput,
   Button,
@@ -8,12 +8,10 @@ import { login } from '../../../services/actions/authActions';
 import stylesLogin from './Login.module.css';
 import stylesGlobal from '../../../utils/global.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useHistory, Redirect, useLocation } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 // import { LOGIN_USER } from '../../services/actions';
 
 function Login(props) {
-  console.log(props);
-  const history = useHistory();
   const [form, setValue] = useState({ email: '', password: '' });
   const dispatch = useDispatch();
   const auth = useSelector((store) => store.authReducer.isAuthorized);
@@ -30,11 +28,6 @@ function Login(props) {
     },
     [form]
   );
-  // useEffect(() => {
-  //   if (auth) {
-  //     history.replace({ pathname: '/' });
-  //   }
-  // }, [auth]);
 
   if (auth) {
     return (

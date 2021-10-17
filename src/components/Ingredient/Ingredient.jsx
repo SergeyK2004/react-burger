@@ -6,21 +6,24 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesIngredient from './Ingredient.module.css';
 import { typeOfIngredientsData } from '../../utils/const';
-import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import { useDispatch } from 'react-redux';
-import { LOAD_DETAILS } from '../../services/actions/index';
 import { useDrag } from 'react-dnd';
+import { useHistory, useLocation } from 'react-router-dom';
 
 function Ingredient({ item, onModalOpen }) {
-  const dispatch = useDispatch();
+  const history = useHistory();
+  let location = useLocation();
   function onClick() {
-    dispatch({
-      type: LOAD_DETAILS,
-      item: item,
+    // dispatch({
+    //   type: LOAD_DETAILS,
+    //   item: item,
+    // });
+    // const modalChild = <IngredientDetails />;
+    // const modalHeader = 'Детали ингредиента';
+    // onModalOpen(modalChild, modalHeader);
+    history.push({
+      pathname: `/ingredients/${item._id}`,
+      state: { background: location },
     });
-    const modalChild = <IngredientDetails />;
-    const modalHeader = 'Детали ингредиента';
-    onModalOpen(modalChild, modalHeader);
   }
   const [, dragRef] = useDrag({
     type: 'ingredient',

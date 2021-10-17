@@ -1,5 +1,5 @@
 import { getUser } from '../../services/actions/authActions';
-import { Route, Redirect, useLocation } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -7,7 +7,6 @@ export function ProtectedRoute({ children, ...rest }) {
   const [isUserLoaded, setUserLoaded] = useState(false);
   const auth = useSelector((store) => store.authReducer.isAuthorized);
   const dispatch = useDispatch();
-  const location = useLocation();
 
   const init = async () => {
     await dispatch(getUser());

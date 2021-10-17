@@ -1,12 +1,16 @@
 import React from 'react';
 import stylesIngredientInfo from './IngredientInfo.module.css';
 import { useSelector } from 'react-redux';
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function IngredientInfo() {
   const { id } = useParams();
   const items = useSelector((store) => store.burgerReducer.ingredients);
   const item = items.find((el) => el._id === id);
+
+  if (!item) {
+    return <div></div>;
+  }
   return (
     <div className={stylesIngredientInfo.bigCard}>
       <h1 className={stylesIngredientInfo.label + ' text text_type_main-large'}>

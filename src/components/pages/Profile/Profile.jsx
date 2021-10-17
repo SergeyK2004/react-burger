@@ -8,15 +8,13 @@ import {
 import stylesProfile from './Profile.module.css';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUser, patchUser } from '../../../services/actions/authActions';
+import { patchUser, logout } from '../../../services/actions/authActions';
 
 function Profile() {
   const dispatch = useDispatch();
-  const auth = useSelector((store) => store.authReducer.isAuthorized);
   const user = useSelector((store) => store.authReducer.user);
   const [form, setValue] = useState(user);
   const [changed, setChanged] = useState(false);
-
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
@@ -29,15 +27,10 @@ function Profile() {
     e.preventDefault();
     dispatch(patchUser(form));
   }
-  // useEffect(() => {
-  //   if (auth) {
-  //     setValue(user);
-  //   } else {
-  //     dispatch(getUser());
-  //     setValue(user);
-  //   }
-  // }, [auth]);
-
+  function onExit(e) {
+    dispatch(logout(form));
+    // history.push({ pathname: '/login' });
+  }
   useEffect(() => {
     if (
       user.name === form.name &&
@@ -75,15 +68,12 @@ function Profile() {
         >
           История заказов
         </NavLink>
-        <NavLink
-          to={{ pathname: '/profile/exit' }}
-          className={stylesProfile.link + ' text text_type_main-medium'}
-          activeClassName={
-            stylesProfile.activeLink + ' text text_type_main-medium'
-          }
+        <div
+          className={stylesProfile.exitLink + ' text text_type_main-medium'}
+          onClick={onExit}
         >
           Выход
-        </NavLink>
+        </div>
         <p
           className={stylesProfile.text + ' text text_type_main-default mt-20'}
         >

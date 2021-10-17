@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://norma.nomoreparties.space/api/';
+export const BASE_URL = 'https://norma.nomoreparties.space/api';
 
 export const autorize = (password, email) => {
   return fetch(`${BASE_URL}/signin`, {

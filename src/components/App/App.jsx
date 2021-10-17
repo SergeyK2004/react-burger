@@ -3,6 +3,8 @@ import stylesApp from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import Modal from '../Modal/Modal';
+import Page404 from '../Page404/Page404';
+import ModalIngredient from '../ModalIngredient/ModalIngredient';
 import { useDispatch } from 'react-redux';
 import { getData } from '../../services/actions/burgerActions';
 import { DELETE_DETAILS } from '../../services/actions';
@@ -11,7 +13,7 @@ import Register from '../pages/Register/Register';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import Profile from '../pages/Profile/Profile';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import IngredientInfo from '../pages/IngredientInfo/IngredientInfo';
 
@@ -19,9 +21,15 @@ function App() {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [modalChild, setModalChild] = React.useState('');
   const [modalHeader, setModalHeader] = React.useState('');
-
+  const history = useHistory();
+  let location = useLocation();
   const dispatch = useDispatch();
-
+  let background;
+  if (history.action === 'PUSH' || history.action === 'REPLACE') {
+    background = location.state && location.state.background;
+  } else {
+    background = undefined;
+  }
   function onModalOpen(modalContent, modalHeaderLabel = '') {
     setModalChild(modalContent);
     setModalHeader(modalHeaderLabel);
@@ -40,7 +48,7 @@ function App() {
 
   return (
     <div className={stylesApp.App}>
-      <Router>
+      <Switch location={background || location}>
         <Route path="/" exact>
           <AppHeader />
           <Main onModalOpen={onModalOpen} />
@@ -74,7 +82,14 @@ function App() {
           <AppHeader />
           <IngredientInfo />
         </Route>
-      </Router>
+        <Route path="/">
+          <AppHeader />
+          <Page404 />
+        </Route>
+      </Switch>
+      {background && (
+        <Route path="/ingredients/:id" children={<ModalIngredient />} />
+      )}
     </div>
   );
 }

@@ -34,6 +34,14 @@
     text-decoration: none;
 }
 
+.exitLink {
+    display: block;
+    height: 64px;
+    color: #8585AD;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .activeLink {
     display: block;
     height: 64px;

@@ -13,7 +13,17 @@ import { resetPassword } from '../../../utils/auth';
 function ResetPassword() {
   const [form, setValue] = useState({ code: '', password: '' });
   const history = useHistory();
-
+  let permission = false;
+  if (history.action === 'PUSH' || history.action === 'REPLACE') {
+    if (history.location.pathname === '/reset-password') {
+      // Все отлично, можно открывать страницу, пользователь
+      // пришел с правильной страницы
+      permission = true;
+    }
+  }
+  if (!permission) {
+    history.replace({ pathname: '/' });
+  }
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };

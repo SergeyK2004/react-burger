@@ -6,12 +6,14 @@ import {
 import stylesForgotPassword from './ForgotPassword.module.css';
 import stylesGlobal from '../../../utils/global.module.css';
 import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import { forgotPassword } from '../../../utils/auth';
+import { useSelector } from 'react-redux';
 
 function ForgotPassword() {
   const [form, setValue] = useState({ email: '' });
   const history = useHistory();
+  const auth = useSelector((store) => store.authReducer.isAuthorized);
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
@@ -31,6 +33,9 @@ function ForgotPassword() {
     },
     [form, history]
   );
+  if (auth) {
+    return <Redirect to={'/'} />;
+  }
 
   return (
     <div className={stylesForgotPassword.main}>
