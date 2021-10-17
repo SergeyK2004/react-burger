@@ -1,28 +1,38 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
-  Input,
   PasswordInput,
   Button,
   EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { login } from '../../../services/actions/authActions';
 import stylesLogin from './Login.module.css';
 import stylesGlobal from '../../../utils/global.module.css';
-import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+// import { LOGIN_USER } from '../../services/actions';
 
 function Login() {
-  const [form, setValue] = useState({ name: '', email: '', password: '' });
+  const history = useHistory();
+  const [form, setValue] = useState({ email: '', password: '' });
+  const dispatch = useDispatch();
+  const auth = useSelector((store) => store.authReducer.isAuthorized);
 
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
-  let login = useCallback(
+  let loginListener = useCallback(
     (e) => {
       e.preventDefault();
-      //   auth.signIn(form);
+      dispatch(login(form));
     },
     [form]
   );
+  useEffect(() => {
+    if (auth) {
+      history.replace({ pathname: '/' });
+    }
+  }, [auth]);
 
   return (
     <div className={stylesLogin.main}>
@@ -31,7 +41,7 @@ function Login() {
           Вход
         </h1>
         <div className={'mb-6'}>
-          <EmailInput value={form.email} name="Логин" onChange={onChange} />
+          <EmailInput value={form.email} name={'email'} onChange={onChange} />
         </div>
         <div className={'mb-6'}>
           <PasswordInput
@@ -40,7 +50,7 @@ function Login() {
             onChange={onChange}
           />
         </div>
-        <Button onClick={login} primary={true}>
+        <Button onClick={loginListener} primary={true}>
           Войти
         </Button>
       </form>

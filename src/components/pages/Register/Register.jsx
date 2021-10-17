@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   Input,
   PasswordInput,
@@ -7,22 +7,32 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesRegister from './Register.module.css';
 import stylesGlobal from '../../../utils/global.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { register } from '../../../services/actions/authActions';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Register() {
+  const history = useHistory();
   const [form, setValue] = useState({ name: '', email: '', password: '' });
+  const dispatch = useDispatch();
+  const auth = useSelector((store) => store.authReducer.isAuthorized);
 
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
-  let login = useCallback(
+  let registerListener = useCallback(
     (e) => {
       e.preventDefault();
-      //   auth.signIn(form);
+      dispatch(register(form));
     },
     [form]
   );
+  useEffect(() => {
+    if (auth) {
+      history.replace({ pathname: '/' });
+    }
+  }, [auth]);
 
   return (
     <div className={stylesRegister.main}>
@@ -50,7 +60,7 @@ function Register() {
             onChange={onChange}
           />
         </div>
-        <Button onClick={login} primary={true}>
+        <Button onClick={registerListener} primary={true}>
           Зарегистрироваться
         </Button>
       </form>

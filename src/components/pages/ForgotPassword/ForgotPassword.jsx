@@ -1,7 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import {
-  Input,
-  PasswordInput,
   Button,
   EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -12,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { forgotPassword } from '../../../utils/auth';
 
 function ForgotPassword() {
-  const [form, setValue] = useState({ name: '', email: '', password: '' });
+  const [form, setValue] = useState({ email: '' });
   const history = useHistory();
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
@@ -31,7 +29,7 @@ function ForgotPassword() {
           console.log(err.message);
         });
     },
-    [form]
+    [form, history]
   );
 
   return (

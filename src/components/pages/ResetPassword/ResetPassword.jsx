@@ -3,7 +3,6 @@ import {
   Input,
   PasswordInput,
   Button,
-  EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesResetPassword from './ResetPassword.module.css';
 import stylesGlobal from '../../../utils/global.module.css';
@@ -32,7 +31,7 @@ function ResetPassword() {
           console.log(err);
         });
     },
-    [form]
+    [form, history]
   );
 
   return (

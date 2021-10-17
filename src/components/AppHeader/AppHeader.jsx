@@ -21,6 +21,9 @@ function AppHeader() {
         break;
       case '/':
         setActiveNav('designer');
+        break;
+      default:
+        setActiveNav('designer');
     }
   }, [path]);
 
