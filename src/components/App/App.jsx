@@ -12,6 +12,8 @@ import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import Profile from '../pages/Profile/Profile';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
+import IngredientInfo from '../pages/IngredientInfo/IngredientInfo';
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
@@ -64,9 +66,13 @@ function App() {
           <AppHeader />
           <ResetPassword />
         </Route>
-        <Route path="/profile">
+        <ProtectedRoute path="/profile">
           <AppHeader />
           <Profile />
+        </ProtectedRoute>
+        <Route path="/ingredients/:id">
+          <AppHeader />
+          <IngredientInfo />
         </Route>
       </Router>
     </div>

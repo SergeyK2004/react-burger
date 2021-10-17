@@ -106,7 +106,7 @@ export function logout(data) {
       });
   };
 }
-export function getUser(data) {
+export function getUser() {
   return function (dispatch) {
     fetchWithRefresh(`${authApiURL}/user`, {
       method: 'GET',
@@ -115,12 +115,6 @@ export function getUser(data) {
         authorization: getCookie('accessToken'),
       },
     })
-      .then((answer) => {
-        if (answer.ok) {
-          return answer.json();
-        }
-        return Promise.reject(`Ошибка ${answer.status}`);
-      })
       .then((answer) => {
         if (answer.success) {
           dispatch({
@@ -150,12 +144,6 @@ export function patchUser(data) {
         password: data.password,
       }),
     })
-      .then((answer) => {
-        if (answer.ok) {
-          return answer.json();
-        }
-        return Promise.reject(`Ошибка ${answer.status}`);
-      })
       .then((answer) => {
         if (answer.success) {
           dispatch({

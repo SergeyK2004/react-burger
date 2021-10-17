@@ -7,11 +7,11 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesRegister from './Register.module.css';
 import stylesGlobal from '../../../utils/global.module.css';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import { register } from '../../../services/actions/authActions';
 import { useSelector, useDispatch } from 'react-redux';
 
-function Register() {
+function Register(props) {
   const history = useHistory();
   const [form, setValue] = useState({ name: '', email: '', password: '' });
   const dispatch = useDispatch();
@@ -33,6 +33,15 @@ function Register() {
       history.replace({ pathname: '/' });
     }
   }, [auth]);
+
+  if (auth) {
+    return (
+      <Redirect
+        // Если объект state не является undefined, вернём пользователя назад.
+        to={props.state?.from || '/'}
+      />
+    );
+  }
 
   return (
     <div className={stylesRegister.main}>
