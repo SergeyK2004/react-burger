@@ -46,7 +46,10 @@ function ResetPassword() {
 
   return (
     <div className={stylesResetPassword.main}>
-      <form className={stylesResetPassword.form + ' mb-20'}>
+      <form
+        onSubmit={passwordCreate}
+        className={stylesResetPassword.form + ' mb-20'}
+      >
         <h1
           className={
             stylesResetPassword.heading + ' text text_type_main-large mb-6'
@@ -70,9 +73,7 @@ function ResetPassword() {
             onChange={onChange}
           />
         </div>
-        <Button onClick={passwordCreate} primary={true}>
-          Сохранить
-        </Button>
+        <Button primary={true}>Сохранить</Button>
       </form>
       <div className={stylesResetPassword.footerLine}>
         <p className={'text text_type_main-default text_color_inactive'}>

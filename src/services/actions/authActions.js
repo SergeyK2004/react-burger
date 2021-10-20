@@ -13,12 +13,7 @@ export function login(data) {
         password: data.password,
       }),
     })
-      .then((answer) => {
-        if (answer.ok) {
-          return answer.json();
-        }
-        return Promise.reject(`Ошибка ${answer.status}`);
-      })
+      .then(checkReponse)
       .then((answer) => {
         if (answer.success) {
           setCookie('accessToken', answer.accessToken);
@@ -49,12 +44,7 @@ export function register(data) {
         name: data.name,
       }),
     })
-      .then((answer) => {
-        if (answer.ok) {
-          return answer.json();
-        }
-        return Promise.reject(`Ошибка ${answer.status}`);
-      })
+      .then(checkReponse)
       .then((answer) => {
         if (answer.success) {
           setCookie('accessToken', answer.accessToken);
@@ -84,12 +74,7 @@ export function logout(data) {
         token: localStorage.getItem('refreshToken'),
       }),
     })
-      .then((answer) => {
-        if (answer.ok) {
-          return answer.json();
-        }
-        return Promise.reject(`Ошибка ${answer.status}`);
-      })
+      .then(checkReponse)
       .then((answer) => {
         if (answer.success) {
           deleteCookie('accessToken');

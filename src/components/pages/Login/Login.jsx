@@ -40,7 +40,7 @@ function Login(props) {
 
   return (
     <div className={stylesLogin.main}>
-      <form className={stylesLogin.form + ' mb-20'}>
+      <form onSubmit={loginListener} className={stylesLogin.form + ' mb-20'}>
         <h1 className={stylesLogin.heading + ' text text_type_main-large mb-6'}>
           Вход
         </h1>
@@ -54,9 +54,7 @@ function Login(props) {
             onChange={onChange}
           />
         </div>
-        <Button onClick={loginListener} primary={true}>
-          Войти
-        </Button>
+        <Button primary={true}>Войти</Button>
       </form>
       <div className={stylesLogin.footerLine}>
         <p className={'text text_type_main-default text_color_inactive'}>

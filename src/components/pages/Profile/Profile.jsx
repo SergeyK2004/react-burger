@@ -25,7 +25,7 @@ function Profile() {
 
   function onClick(e) {
     e.preventDefault();
-    dispatch(patchUser(form));
+    if (changed) dispatch(patchUser(form));
   }
   function onExit(e) {
     dispatch(logout(form));
@@ -80,7 +80,7 @@ function Profile() {
           В этом разделе вы можете изменить свои персональные данные
         </p>
       </div>
-      <form className={stylesProfile.form + ' mb-20'}>
+      <form className={stylesProfile.form + ' mb-20'} onSubmit={onClick}>
         <div className={stylesProfile.input + ' mb-6'}>
           <Input
             placeholder="Имя"
@@ -103,12 +103,7 @@ function Profile() {
           <Button onClick={cancelClick} type="secondary">
             Отмена
           </Button>
-          <Button
-            type="primary"
-            size="medium"
-            style={inactiveButtonStyle}
-            {...(changed && (onClick = { onClick }))}
-          >
+          <Button type="primary" size="medium" style={inactiveButtonStyle}>
             Сохранить
           </Button>
         </div>

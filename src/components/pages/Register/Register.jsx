@@ -45,7 +45,10 @@ function Register(props) {
 
   return (
     <div className={stylesRegister.main}>
-      <form className={stylesRegister.form + ' mb-20'}>
+      <form
+        onSubmit={registerListener}
+        className={stylesRegister.form + ' mb-20'}
+      >
         <h1
           className={stylesRegister.heading + ' text text_type_main-large mb-6'}
         >
@@ -69,9 +72,7 @@ function Register(props) {
             onChange={onChange}
           />
         </div>
-        <Button onClick={registerListener} primary={true}>
-          Зарегистрироваться
-        </Button>
+        <Button primary={true}>Зарегистрироваться</Button>
       </form>
       <div className={stylesRegister.footerLine}>
         <p className={'text text_type_main-default text_color_inactive'}>

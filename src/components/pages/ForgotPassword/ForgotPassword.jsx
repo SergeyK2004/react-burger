@@ -18,7 +18,7 @@ function ForgotPassword() {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
-  let passwordReset = useCallback(
+  const passwordReset = useCallback(
     (e) => {
       e.preventDefault();
       forgotPassword(form.email)
@@ -39,7 +39,10 @@ function ForgotPassword() {
 
   return (
     <div className={stylesForgotPassword.main}>
-      <form className={stylesForgotPassword.form + ' mb-20'}>
+      <form
+        className={stylesForgotPassword.form + ' mb-20'}
+        onSubmit={passwordReset}
+      >
         <h1
           className={
             stylesForgotPassword.heading + ' text text_type_main-large mb-6'
@@ -55,9 +58,7 @@ function ForgotPassword() {
             onChange={onChange}
           />
         </div>
-        <Button onClick={passwordReset} primary={true}>
-          Восстановить
-        </Button>
+        <Button primary={true}>Восстановить</Button>
       </form>
       <div className={stylesForgotPassword.footerLine}>
         <p className={'text text_type_main-default text_color_inactive'}>

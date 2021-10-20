@@ -16,6 +16,7 @@ import Profile from '../pages/Profile/Profile';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import IngredientInfo from '../pages/IngredientInfo/IngredientInfo';
+import IngredientDetails from '../IngredientDetails/IngredientDetails';
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
@@ -25,6 +26,9 @@ function App() {
   let location = useLocation();
   const dispatch = useDispatch();
   let background;
+  const ingredientModalChild = <IngredientDetails />;
+  const ingredientModalHeader = 'Детали ингредиента';
+
   if (history.action === 'PUSH' || history.action === 'REPLACE') {
     background = location.state && location.state.background;
   } else {
@@ -42,6 +46,11 @@ function App() {
       type: DELETE_DETAILS,
     });
   }
+
+  function onIngredientModalClose() {
+    history.goBack();
+  }
+
   useEffect(() => {
     dispatch(getData());
   }, [dispatch]);
@@ -87,8 +96,18 @@ function App() {
           <Page404 />
         </Route>
       </Switch>
-      {background && (
+      {/* {background && (
         <Route path="/ingredients/:id" children={<ModalIngredient />} />
+      )} */}
+      {background && (
+        <Route path="/ingredients/:id">
+          <Modal
+            onClose={onIngredientModalClose}
+            header={ingredientModalHeader}
+          >
+            {ingredientModalChild}
+          </Modal>
+        </Route>
       )}
     </div>
   );
