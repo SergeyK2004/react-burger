@@ -28,7 +28,7 @@ function ResetPassword() {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
-  let passwordCreate = useCallback(
+  const passwordCreate = useCallback(
     (e) => {
       e.preventDefault();
       resetPassword(form.password, form.code)

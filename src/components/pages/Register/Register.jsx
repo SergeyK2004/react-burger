@@ -21,7 +21,7 @@ function Register(props) {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
-  let registerListener = useCallback(
+  const registerListener = useCallback(
     (e) => {
       e.preventDefault();
       dispatch(register(form));

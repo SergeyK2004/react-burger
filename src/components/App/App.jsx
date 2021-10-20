@@ -4,7 +4,6 @@ import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import Modal from '../Modal/Modal';
 import Page404 from '../Page404/Page404';
-import ModalIngredient from '../ModalIngredient/ModalIngredient';
 import { useDispatch } from 'react-redux';
 import { getData } from '../../services/actions/burgerActions';
 import { DELETE_DETAILS } from '../../services/actions';
