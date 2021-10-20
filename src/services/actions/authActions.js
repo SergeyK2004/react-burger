@@ -150,7 +150,7 @@ const checkReponse = (res) => {
 };
 
 export const refreshToken = () => {
-  return fetch(`${authApiURL}/auth/token`, {
+  return fetch(`${authApiURL}/token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -183,7 +183,7 @@ export function setCookie(name, value, props) {
   props = props || {};
   props = {
     path: '/',
-    expires: 1200,
+    expires: 35900,
     ...props,
   };
   let exp = props.expires;

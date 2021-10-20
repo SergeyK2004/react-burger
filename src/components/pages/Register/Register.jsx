@@ -72,7 +72,7 @@ function Register(props) {
             onChange={onChange}
           />
         </div>
-        <Button primary={true}>Зарегистрироваться</Button>
+        <Button type="primary">Зарегистрироваться</Button>
       </form>
       <div className={stylesRegister.footerLine}>
         <p className={'text text_type_main-default text_color_inactive'}>

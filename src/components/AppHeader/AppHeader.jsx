@@ -59,10 +59,11 @@ function AppHeader() {
           </Link>
         </div>
         <div className={stylesAppHeader.logo}>
-          <Logo />
-        </div>{' '}
-        <Link
-          to="/profile"
+          <Link to="/">
+            <Logo />
+          </Link>
+        </div>
+        <div
           className={
             (activeNav === 'profile'
               ? stylesAppHeader.menuItemActive
@@ -71,11 +72,20 @@ function AppHeader() {
             stylesAppHeader.menuItemLs
           }
         >
-          <ProfileIcon
-            type={activeNav === 'profile' ? 'primary' : 'secondary'}
-          />
-          <p className="ml-2">Личный кабинет</p>
-        </Link>
+          <Link
+            to="/profile"
+            className={
+              (activeNav === 'profile'
+                ? stylesAppHeader.menuItemActive
+                : stylesAppHeader.menuItem) + ' text text_type_main-default '
+            }
+          >
+            <ProfileIcon
+              type={activeNav === 'profile' ? 'primary' : 'secondary'}
+            />
+            <p className="ml-2">Личный кабинет</p>
+          </Link>
+        </div>
       </nav>
     </div>
   );
