@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import stylesBurgerConstructor from './BurgerConstructor.module.css';
+import { useHistory } from 'react-router-dom';
 import {
   CurrencyIcon,
   ConstructorElement,
@@ -22,6 +23,8 @@ function BurgerConstructor({ onModalOpen }) {
   const dispatch = useDispatch();
   const data = useSelector((store) => store.burgerReducer.constructor);
   const constId = Date.now();
+  const auth = useSelector((store) => store.authReducer.isAuthorized);
+  const history = useHistory();
 
   const [, dropTarget] = useDrop({
     accept: 'ingredient',
@@ -62,10 +65,14 @@ function BurgerConstructor({ onModalOpen }) {
     return { total: total };
   }
   function onClick() {
-    dispatch(postOrder(data));
-    const modalChild = <OrderDetails />;
-    const modalHeader = '';
-    onModalOpen(modalChild, modalHeader);
+    if (auth) {
+      dispatch(postOrder(data));
+      const modalChild = <OrderDetails />;
+      const modalHeader = '';
+      onModalOpen(modalChild, modalHeader);
+    } else {
+      history.replace({ pathname: '/login' });
+    }
   }
   function moveElement(dragIndex, hoverIndex) {
     dispatch({

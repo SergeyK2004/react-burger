@@ -14,7 +14,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     margin: 0 auto;
 }
@@ -34,5 +34,20 @@
 
 .burgers {
     display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    width: 33%;
+}
 
+.logo {
+    flex-grow: 1;
+    flex-shrink: 1;
+    width: 33%;
+}
+
+.menuItemLs {
+    justify-content: flex-end;
+    flex-grow: 1;
+    flex-shrink: 1;
+    width: 33%;
 }

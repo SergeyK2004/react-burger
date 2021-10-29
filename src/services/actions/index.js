@@ -7,3 +7,8 @@ export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
 export const CHANGE_INGREDIENT = 'CHANGE_INGREDIENT';
 export const ORDER_CLEAR = 'ORDER_CLEAR';
+
+export const LOGIN_USER = 'LOGIN_USER';
+export const REGISTER_USER = 'REGISTER_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const CHEK_TOKEN = 'CHEK_TOKEN';
