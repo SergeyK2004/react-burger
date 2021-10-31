@@ -2,13 +2,13 @@ import React from 'react';
 import stylesIngredientDetails from './IngredientDetails.module.css';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { TItem } from '../../utils/types';
+
 
 function IngredientDetails() {
-  // function IngredientDetails({ item }) {
-  // const item = useSelector((store) => store.burgerReducer.ingredient);
-  let { id } = useParams();
-  const items = useSelector((store) => store.burgerReducer.ingredients);
-  const item = items.find((el) => el._id === id);
+  let { id } = useParams<{id?: string}>();
+  const items = useSelector((store: any) => store.burgerReducer.ingredients);
+  const item = items.find((el: TItem) => el._id === id);
 
   return (
     <div className={stylesIngredientDetails.bigCard}>

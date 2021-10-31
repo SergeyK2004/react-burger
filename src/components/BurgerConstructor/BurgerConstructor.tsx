@@ -1,5 +1,4 @@
-import React, { useReducer } from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent, ReactElement, useReducer } from 'react';
 import stylesBurgerConstructor from './BurgerConstructor.module.css';
 import { useHistory } from 'react-router-dom';
 import {
@@ -17,27 +16,34 @@ import {
   DELETE_INGREDIENT,
 } from '../../services/actions';
 import ConstructorIngredient from '../ConstructorIngredient/ConstructorIngredient';
+import { TItem } from '../../utils/types';
 const initialState = { total: 0 };
 
-function BurgerConstructor({ onModalOpen }) {
+interface IBurgerConstructorProps {
+  onModalOpen: (modalChild: ReactElement, modalHeader: string) => void;
+}
+
+
+
+const BurgerConstructor: FunctionComponent<IBurgerConstructorProps> = ({ onModalOpen}) => {
   const dispatch = useDispatch();
-  const data = useSelector((store) => store.burgerReducer.constructor);
+  const data = useSelector((store: any) => store.burgerReducer.constructor);
   const constId = Date.now();
-  const auth = useSelector((store) => store.authReducer.isAuthorized);
+  const auth = useSelector((store: any) => store.authReducer.isAuthorized);
   const history = useHistory();
 
   const [, dropTarget] = useDrop({
     accept: 'ingredient',
-    drop(item) {
+    drop(item: TItem) {
       onDropHandler(item);
     },
   });
 
-  const onDropHandler = (item) => {
+  const onDropHandler = (item: TItem) => {
     let qnt = 1;
     if (item.type === 'bun') {
       qnt = 2;
-      const bunElement = data.find((el) => el.type === 'bun');
+      const bunElement = data.find((el: TItem) => el.type === 'bun');
       if (bunElement) {
         dispatch({
           type: DELETE_INGREDIENT,
@@ -53,28 +59,30 @@ function BurgerConstructor({ onModalOpen }) {
       qnt: qnt,
     });
   };
-  const burgerBun = data.find((item) => item.type === 'bun');
+  const burgerBun = data.find((item: TItem) => item.type === 'bun');
 
   const [stateTotal, dispatchTotal] = useReducer(reducer, initialState);
 
-  function reducer(state, action) {
+  function reducer() {
     const total = data.reduce(
-      (sum, item) => sum + (item.type === 'bun' ? item.price * 2 : item.price),
+      (sum: number, item: TItem) => sum + (item.type === 'bun' ? item.price * 2 : item.price),
       0
     );
     return { total: total };
   }
   function onClick() {
-    if (auth) {
-      dispatch(postOrder(data));
-      const modalChild = <OrderDetails />;
-      const modalHeader = '';
-      onModalOpen(modalChild, modalHeader);
-    } else {
-      history.replace({ pathname: '/login' });
+    if (burgerBun) {
+      if (auth) {
+        dispatch(postOrder(data));
+        const modalChild = <OrderDetails />;
+        const modalHeader = '';
+        onModalOpen(modalChild, modalHeader);
+      } else {
+        history.replace({ pathname: '/login' });
+      }
     }
   }
-  function moveElement(dragIndex, hoverIndex) {
+  function moveElement(dragIndex: number, hoverIndex: number) {
     dispatch({
       type: CHANGE_INGREDIENT,
       dragIndex: dragIndex,
@@ -100,7 +108,7 @@ function BurgerConstructor({ onModalOpen }) {
       )}
       <div className={stylesBurgerConstructor.list + ' mt-4 mb-4 pr-4'}>
         {data.map(
-          (el, index) =>
+          (el: TItem, index: number) =>
             el.type !== 'bun' && (
               <ConstructorIngredient
                 item={el}
@@ -132,15 +140,15 @@ function BurgerConstructor({ onModalOpen }) {
           </p>
           <CurrencyIcon type="primary" />
         </div>
-
+<div           style={inactiveButtonStyle}>
         <Button
           type="primary"
           size="medium"
-          style={inactiveButtonStyle}
-          {...(burgerBun && (onClick = { onClick }))}
+          onClick = { onClick }
         >
           Оформить заказ
-        </Button>
+          </Button>
+          </div>
       </div>
     </div>
   );
@@ -148,6 +156,3 @@ function BurgerConstructor({ onModalOpen }) {
 
 export default BurgerConstructor;
 
-BurgerConstructor.propTypes = {
-  onModalOpen: PropTypes.func.isRequired,
-};

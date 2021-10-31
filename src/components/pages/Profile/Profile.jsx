@@ -27,7 +27,6 @@ function Profile() {
   };
 
   function onClick(e) {
-    console.log(e, form, changed);
     e.preventDefault();
     if (changed) dispatch(patchUser(form));
   }

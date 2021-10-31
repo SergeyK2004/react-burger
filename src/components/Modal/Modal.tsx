@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import stylesModal from './Modal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 
 const modalRoot = document.getElementById('react-modals');
 
-function Modal({ children, onClose, header = '' }) {
+interface IModalProps {
+  children: ReactElement;
+  onClose: () => void;
+  header?: string;
+}
+
+const Modal: FunctionComponent<IModalProps> = ({ children, onClose, header = '' }) => {
+  if (!modalRoot) return;
   function onOverlayClick() {
     onClose();
   }
 
-  function onPressEsc(evt) {
+  function onPressEsc(evt: KeyboardEvent) {
     if (evt.key === 'Escape') {
       evt.preventDefault();
       onClose();
@@ -43,9 +49,3 @@ function Modal({ children, onClose, header = '' }) {
 }
 
 export default Modal;
-
-Modal.propTypes = {
-  children: PropTypes.element.isRequired,
-  onClose: PropTypes.func.isRequired,
-  header: PropTypes.string,
-};

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import PropTypes from 'prop-types';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
@@ -6,7 +6,11 @@ import stylesMain from './Main.module.css';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-function Main({ onModalOpen }) {
+interface IMainProps {
+  onModalOpen: () => void;
+}
+
+const  Main: FunctionComponent<IMainProps> = ({ onModalOpen }) => {
   return (
     <div className={stylesMain.main}>
       <DndProvider backend={HTML5Backend}>
@@ -26,6 +30,3 @@ function Main({ onModalOpen }) {
 
 export default Main;
 
-Main.propTypes = {
-  onModalOpen: PropTypes.func.isRequired,
-};

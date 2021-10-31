@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, ReactElement } from 'react';
 import stylesApp from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
@@ -16,13 +16,18 @@ import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import IngredientInfo from '../pages/IngredientInfo/IngredientInfo';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import { Location } from 'history';
+
+type TLocationState = {
+  background: Location;
+}
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
-  const [modalChild, setModalChild] = React.useState('');
+  const [modalChild, setModalChild] = React.useState<ReactElement | ''>('');
   const [modalHeader, setModalHeader] = React.useState('');
   const history = useHistory();
-  let location = useLocation();
+  let location = useLocation<TLocationState>();
   const dispatch = useDispatch();
   let background;
   const ingredientModalChild = <IngredientDetails />;
@@ -33,7 +38,7 @@ function App() {
   } else {
     background = undefined;
   }
-  function onModalOpen(modalContent, modalHeaderLabel = '') {
+  function onModalOpen(modalContent: ReactElement, modalHeaderLabel = '') {
     setModalChild(modalContent);
     setModalHeader(modalHeaderLabel);
     setModalIsOpen(true);

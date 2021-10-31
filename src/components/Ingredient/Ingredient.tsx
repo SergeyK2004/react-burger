@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FunctionComponent, ReactElement} from 'react';
 import PropTypes from 'prop-types';
 import {
   CurrencyIcon,
@@ -8,18 +8,18 @@ import stylesIngredient from './Ingredient.module.css';
 import { typeOfIngredientsData } from '../../utils/const';
 import { useDrag } from 'react-dnd';
 import { useHistory, useLocation } from 'react-router-dom';
+import { TItem } from '../../utils/types';
 
-function Ingredient({ item, onModalOpen }) {
+interface IIngredientProps {
+  item: TItem;
+  onModalOpen: (modalChild: ReactElement, modalHeader: string) => void;
+}
+
+
+const  Ingredient: FunctionComponent<IIngredientProps> = ({ item, onModalOpen }) => {
   const history = useHistory();
   let location = useLocation();
   function onClick() {
-    // dispatch({
-    //   type: LOAD_DETAILS,
-    //   item: item,
-    // });
-    // const modalChild = <IngredientDetails />;
-    // const modalHeader = 'Детали ингредиента';
-    // onModalOpen(modalChild, modalHeader);
     history.push({
       pathname: `/ingredients/${item._id}`,
       state: { background: location },
@@ -45,8 +45,3 @@ function Ingredient({ item, onModalOpen }) {
 }
 
 export default Ingredient;
-
-Ingredient.propTypes = {
-  item: typeOfIngredientsData.isRequired,
-  onModalOpen: PropTypes.func.isRequired,
-};
