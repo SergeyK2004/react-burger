@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, MouseEvent, FormEvent, SyntheticEvent } from 'react';
 import {
   Input,
   PasswordInput,
@@ -10,27 +10,32 @@ import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { patchUser, logout } from '../../../services/actions/authActions';
 
+interface IUserForm {
+  name: string,
+  password: string,
+  email: string
+}
+
 function Profile() {
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.authReducer.user);
-  const [form, setValue] = useState({});
+  const user = useSelector((store:any) => store.authReducer.user);
+  const [form, setValue] = useState<IUserForm>({name:'', password:'',email:''});
   const [changed, setChanged] = useState(false);
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({ ...form, [e.target.name]: e.target.value });
     setChanged(true);
     console.log(form);
   };
 
-  const cancelClick = (e) => {
-    console.log(e, 'canceled');
+  const cancelClick = (e: SyntheticEvent<Element, Event>) => {
     setValue(user);
   };
 
-  function onClick(e) {
+  function onClick(e: FormEvent) {
     e.preventDefault();
     if (changed) dispatch(patchUser(form));
   }
-  function onExit(e) {
+  function onExit(e: MouseEvent) {
     dispatch(logout(form));
   }
   useEffect(() => {
@@ -98,9 +103,11 @@ function Profile() {
           />
         </div>
         <div className={stylesProfile.buttons}>
-          <Button type="primary" size="medium" style={inactiveButtonStyle}>
+          <div  style={inactiveButtonStyle}>
+          <Button type="primary" size="medium">
             Сохранить
           </Button>
+          </div>
           <Button onClick={cancelClick} type="secondary">
             Отмена
           </Button>

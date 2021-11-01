@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Page404(props) {
+function Page404() {
   return (
     <div>
       <p className="text text_type_digits-large mt-20">404</p>

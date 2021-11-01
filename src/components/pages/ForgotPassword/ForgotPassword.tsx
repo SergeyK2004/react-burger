@@ -13,8 +13,8 @@ import { useSelector } from 'react-redux';
 function ForgotPassword() {
   const [form, setValue] = useState({ email: '' });
   const history = useHistory();
-  const auth = useSelector((store) => store.authReducer.isAuthorized);
-  const onChange = (e) => {
+  const auth = useSelector((store: any) => store.authReducer.isAuthorized);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -54,11 +54,10 @@ function ForgotPassword() {
           <EmailInput
             value={form.email}
             name="email"
-            placeholder="Укажите e-mail"
             onChange={onChange}
           />
         </div>
-        <Button primary={true}>Восстановить</Button>
+        <Button type='primary'>Восстановить</Button>
       </form>
       <div className={stylesForgotPassword.footerLine}>
         <p className={'text text_type_main-default text_color_inactive'}>

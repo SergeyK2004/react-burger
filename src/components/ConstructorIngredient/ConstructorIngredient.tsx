@@ -1,12 +1,10 @@
 import React, { FunctionComponent, useRef } from 'react';
-import PropTypes from 'prop-types';
 import stylesConstructorIngredient from './ConstructorIngredient.module.css';
 import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrop, useDrag } from 'react-dnd';
-import { typeOfIngredientsData } from '../../utils/const';
 
 import { useDispatch } from 'react-redux';
 import { DELETE_INGREDIENT } from '../../services/actions';

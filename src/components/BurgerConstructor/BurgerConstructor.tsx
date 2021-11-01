@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useReducer } from 'react';
+import React, { FunctionComponent, ReactElement, ReactNode, useReducer } from 'react';
 import stylesBurgerConstructor from './BurgerConstructor.module.css';
 import { useHistory } from 'react-router-dom';
 import {
@@ -20,10 +20,8 @@ import { TItem } from '../../utils/types';
 const initialState = { total: 0 };
 
 interface IBurgerConstructorProps {
-  onModalOpen: (modalChild: ReactElement, modalHeader: string) => void;
+  onModalOpen: (modalChild: ReactNode, modalHeader: string) => void;
 }
-
-
 
 const BurgerConstructor: FunctionComponent<IBurgerConstructorProps> = ({ onModalOpen}) => {
   const dispatch = useDispatch();

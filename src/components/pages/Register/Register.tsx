@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, FunctionComponent } from 'react';
 import {
   Input,
   PasswordInput,
@@ -7,17 +7,24 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesRegister from './Register.module.css';
 import stylesGlobal from '../../../utils/global.module.css';
-import { Link, useHistory, Redirect } from 'react-router-dom';
+import { Link, useHistory, Redirect} from 'react-router-dom';
 import { register } from '../../../services/actions/authActions';
 import { useSelector, useDispatch } from 'react-redux';
 
-function Register(props) {
+
+interface IRegisterProps {
+  state?: {
+    from: Location;
+  }
+}
+
+const  Register: FunctionComponent<IRegisterProps> = (props) => {
   const history = useHistory();
   const [form, setValue] = useState({ name: '', email: '', password: '' });
   const dispatch = useDispatch();
-  const auth = useSelector((store) => store.authReducer.isAuthorized);
+  const auth = useSelector((store: any) => store.authReducer.isAuthorized);
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 

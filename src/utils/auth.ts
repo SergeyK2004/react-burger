@@ -1,6 +1,6 @@
 export const BASE_URL = 'https://norma.nomoreparties.space/api';
 
-export const autorize = (password, email) => {
+export const autorize = (password: string, email: string) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
@@ -19,7 +19,7 @@ export const autorize = (password, email) => {
   });
 };
 
-export const forgotPassword = (email) => {
+export const forgotPassword = (email: string) => {
   return fetch(`${BASE_URL}/password-reset`, {
     method: 'POST',
     headers: {
@@ -37,7 +37,7 @@ export const forgotPassword = (email) => {
   });
 };
 
-export const resetPassword = (password, code) => {
+export const resetPassword = (password: string, code: string) => {
   return fetch(`${BASE_URL}/password-reset/reset`, {
     method: 'POST',
     headers: {
@@ -55,7 +55,7 @@ export const resetPassword = (password, code) => {
     return response.json();
   });
 };
-export const chekToken = (token) => {
+export const chekToken = (token: string) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {

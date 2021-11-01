@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
@@ -7,7 +7,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 interface IMainProps {
-  onModalOpen: () => void;
+  onModalOpen: (modalChild: ReactNode, modalHeader: string) => void;
 }
 
 const  Main: FunctionComponent<IMainProps> = ({ onModalOpen }) => {

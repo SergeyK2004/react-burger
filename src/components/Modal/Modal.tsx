@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, ReactNode, ReactPortal } from 'react';
 import ReactDOM from 'react-dom';
 import stylesModal from './Modal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
@@ -6,13 +6,18 @@ import ModalOverlay from '../ModalOverlay/ModalOverlay';
 const modalRoot = document.getElementById('react-modals');
 
 interface IModalProps {
-  children: ReactElement;
+  children: ReactNode | '';
   onClose: () => void;
   header?: string;
 }
 
 const Modal: FunctionComponent<IModalProps> = ({ children, onClose, header = '' }) => {
-  if (!modalRoot) return;
+  if (!modalRoot) {
+    return (
+    <>
+      </>
+    )
+  }
   function onOverlayClick() {
     onClose();
   }

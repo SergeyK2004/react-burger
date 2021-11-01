@@ -1,4 +1,4 @@
-import React, { ReactElement, FunctionComponent } from 'react';
+import React, { ReactElement, FunctionComponent, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesBurgerIngredients from './BurgerIngredients.module.css';
@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { TItem } from '../../utils/types';
 
 interface IBurgerIngredientsProps {
-  onModalOpen: (modalChild: ReactElement, modalHeader: string) => void;
+  onModalOpen: (modalChild: ReactNode, modalHeader: string) => void;
 }
 
 const  BurgerIngredients: FunctionComponent<IBurgerIngredientsProps> = ({ onModalOpen }) => {

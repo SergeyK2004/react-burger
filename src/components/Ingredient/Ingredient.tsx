@@ -1,4 +1,4 @@
-import React, {FunctionComponent, ReactElement} from 'react';
+import React, {FunctionComponent, ReactElement, ReactNode} from 'react';
 import PropTypes from 'prop-types';
 import {
   CurrencyIcon,
@@ -12,7 +12,7 @@ import { TItem } from '../../utils/types';
 
 interface IIngredientProps {
   item: TItem;
-  onModalOpen: (modalChild: ReactElement, modalHeader: string) => void;
+  onModalOpen: (modalChild: ReactNode, modalHeader: string) => void;
 }
 
 

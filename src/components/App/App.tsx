@@ -1,4 +1,4 @@
-import React, { useEffect, ReactElement } from 'react';
+import React, { useEffect, ReactElement, ReactNode } from 'react';
 import stylesApp from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
@@ -24,7 +24,7 @@ type TLocationState = {
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
-  const [modalChild, setModalChild] = React.useState<ReactElement | ''>('');
+  const [modalChild, setModalChild] = React.useState<ReactNode | ''>('');
   const [modalHeader, setModalHeader] = React.useState('');
   const history = useHistory();
   let location = useLocation<TLocationState>();
@@ -38,7 +38,7 @@ function App() {
   } else {
     background = undefined;
   }
-  function onModalOpen(modalContent: ReactElement, modalHeaderLabel = '') {
+  function onModalOpen(modalContent: ReactNode, modalHeaderLabel = '') {
     setModalChild(modalContent);
     setModalHeader(modalHeaderLabel);
     setModalIsOpen(true);
