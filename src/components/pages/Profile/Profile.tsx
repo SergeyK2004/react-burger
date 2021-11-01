@@ -36,7 +36,7 @@ function Profile() {
     if (changed) dispatch(patchUser(form));
   }
   function onExit(e: MouseEvent) {
-    dispatch(logout(form));
+    dispatch(logout());
   }
   useEffect(() => {
     setValue(user);

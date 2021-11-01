@@ -5,7 +5,6 @@ import {
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesIngredient from './Ingredient.module.css';
-import { typeOfIngredientsData } from '../../utils/const';
 import { useDrag } from 'react-dnd';
 import { useHistory, useLocation } from 'react-router-dom';
 import { TItem } from '../../utils/types';

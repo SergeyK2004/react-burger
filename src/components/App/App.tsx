@@ -13,7 +13,7 @@ import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import Profile from '../pages/Profile/Profile';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
-import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import IngredientInfo from '../pages/IngredientInfo/IngredientInfo';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import { Location } from 'history';

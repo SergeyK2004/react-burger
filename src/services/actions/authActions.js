@@ -1,6 +1,13 @@
 import { authApiURL } from '../../utils/const';
 import { LOGIN_USER, REGISTER_USER, LOGOUT_USER, CHEK_TOKEN } from './index';
 
+// type TUserData = {
+//   email: string,
+//   password: string,
+//   name?: string,
+
+// }
+
 export function login(data) {
   return function (dispatch) {
     fetch(`${authApiURL}/login`, {
@@ -63,7 +70,7 @@ export function register(data) {
   };
 }
 
-export function logout(data) {
+export function logout() {
   return function (dispatch) {
     fetch(`${authApiURL}/logout`, {
       method: 'POST',
@@ -179,7 +186,7 @@ export const fetchWithRefresh = async (url, options) => {
   }
 };
 
-export function setCookie(name, value, props) {
+export function setCookie(name, value, props = {}) {
   props = props || {};
   props = {
     path: '/',

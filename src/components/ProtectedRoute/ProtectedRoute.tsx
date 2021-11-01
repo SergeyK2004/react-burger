@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 interface IProtectedRouteProps {
   children: ReactNode;
+  path: string;
 }
 
 const ProtectedRoute: FunctionComponent<IProtectedRouteProps> = ({ children, ...rest }) => {
@@ -47,3 +48,5 @@ const ProtectedRoute: FunctionComponent<IProtectedRouteProps> = ({ children, ...
     />
   );
 }
+
+export default ProtectedRoute;

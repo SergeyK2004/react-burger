@@ -12,12 +12,6 @@ interface IModalProps {
 }
 
 const Modal: FunctionComponent<IModalProps> = ({ children, onClose, header = '' }) => {
-  if (!modalRoot) {
-    return (
-    <>
-      </>
-    )
-  }
   function onOverlayClick() {
     onClose();
   }
@@ -35,6 +29,10 @@ const Modal: FunctionComponent<IModalProps> = ({ children, onClose, header = '' 
       document.removeEventListener('keydown', onPressEsc);
     };
   }, []);
+
+    if (!modalRoot) {
+    return null;
+  }
 
   return ReactDOM.createPortal(
     <>
