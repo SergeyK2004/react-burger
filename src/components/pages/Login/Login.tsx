@@ -11,13 +11,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 // import { LOGIN_USER } from '../../services/actions';
 
-function Login(props) {
+type TLocationState = {
+  background: Location;
+  from: Location;
+}
+
+function Login() {
   const [form, setValue] = useState({ email: '', password: '' });
   const dispatch = useDispatch();
-  const auth = useSelector((store) => store.authReducer.isAuthorized);
-  let location = useLocation();
+  const auth = useSelector((store: any) => store.authReducer.isAuthorized);
+  let location = useLocation<TLocationState>();
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
