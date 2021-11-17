@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App/App.tsx';
+import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import configureStore from './services/store';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-const store = configureStore();
+export const store = configureStore();
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

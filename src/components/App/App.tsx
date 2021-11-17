@@ -4,7 +4,7 @@ import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import Modal from '../Modal/Modal';
 import Page404 from '../Page404/Page404';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../utils/hooks';
 import { getData } from '../../services/actions/burgerActions';
 import { DELETE_DETAILS } from '../../services/actions';
 import Login from '../pages/Login/Login';
@@ -20,7 +20,7 @@ import { Location } from 'history';
 
 type TLocationState = {
   background: Location;
-}
+};
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = React.useState(false);

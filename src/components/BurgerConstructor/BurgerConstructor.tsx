@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, ReactNode, useReducer } from 'react';
+import React, { FunctionComponent, ReactNode, useReducer } from 'react';
 import stylesBurgerConstructor from './BurgerConstructor.module.css';
 import { useHistory } from 'react-router-dom';
 import {
@@ -7,7 +7,7 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from '../OrderDetails/OrderDetails';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../utils/hooks';
 import { postOrder } from '../../services/actions/burgerActions';
 import { useDrop } from 'react-dnd';
 import {
@@ -23,11 +23,13 @@ interface IBurgerConstructorProps {
   onModalOpen: (modalChild: ReactNode, modalHeader: string) => void;
 }
 
-const BurgerConstructor: FunctionComponent<IBurgerConstructorProps> = ({ onModalOpen}) => {
+const BurgerConstructor: FunctionComponent<IBurgerConstructorProps> = ({
+  onModalOpen,
+}) => {
   const dispatch = useDispatch();
-  const data = useSelector((store: any) => store.burgerReducer.constructor);
+  const data = useSelector((store) => store.burgerReducer.constructor);
   const constId = Date.now();
-  const auth = useSelector((store: any) => store.authReducer.isAuthorized);
+  const auth = useSelector((store) => store.authReducer.isAuthorized);
   const history = useHistory();
 
   const [, dropTarget] = useDrop({
@@ -63,7 +65,8 @@ const BurgerConstructor: FunctionComponent<IBurgerConstructorProps> = ({ onModal
 
   function reducer() {
     const total = data.reduce(
-      (sum: number, item: TItem) => sum + (item.type === 'bun' ? item.price * 2 : item.price),
+      (sum: number, item: TItem) =>
+        sum + (item.type === 'bun' ? item.price * 2 : item.price),
       0
     );
     return { total: total };
@@ -138,19 +141,14 @@ const BurgerConstructor: FunctionComponent<IBurgerConstructorProps> = ({ onModal
           </p>
           <CurrencyIcon type="primary" />
         </div>
-<div           style={inactiveButtonStyle}>
-        <Button
-          type="primary"
-          size="medium"
-          onClick = { onClick }
-        >
-          Оформить заказ
+        <div style={inactiveButtonStyle}>
+          <Button type="primary" size="medium" onClick={onClick}>
+            Оформить заказ
           </Button>
-          </div>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default BurgerConstructor;
-

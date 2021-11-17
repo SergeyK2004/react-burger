@@ -1,15 +1,16 @@
 import React from 'react';
 import stylesIngredientDetails from './IngredientDetails.module.css';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../utils/hooks';
 import { TItem } from '../../utils/types';
 
-
 function IngredientDetails() {
-  let { id } = useParams<{id?: string}>();
-  const items = useSelector((store: any) => store.burgerReducer.ingredients);
+  let { id } = useParams<{ id?: string }>();
+  const items = useSelector((store) => store.burgerReducer.ingredients);
   const item = items.find((el: TItem) => el._id === id);
-
+  if (!item) {
+    return <div></div>;
+  }
   return (
     <div className={stylesIngredientDetails.bigCard}>
       <img src={item.image_large} alt="Ингредиент" className="mr-5 ml-5" />

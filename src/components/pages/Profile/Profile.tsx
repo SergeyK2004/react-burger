@@ -1,4 +1,10 @@
-import React, { useState, useEffect, MouseEvent, FormEvent, SyntheticEvent } from 'react';
+import React, {
+  useState,
+  useEffect,
+  MouseEvent,
+  FormEvent,
+  SyntheticEvent,
+} from 'react';
 import {
   Input,
   PasswordInput,
@@ -7,19 +13,18 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesProfile from './Profile.module.css';
 import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../../utils/hooks';
 import { patchUser, logout } from '../../../services/actions/authActions';
-
-interface IUserForm {
-  name: string,
-  password: string,
-  email: string
-}
+import { TUserData } from '../../../utils/types';
 
 function Profile() {
   const dispatch = useDispatch();
-  const user = useSelector((store:any) => store.authReducer.user);
-  const [form, setValue] = useState<IUserForm>({name:'', password:'',email:''});
+  const user = useSelector((store) => store.authReducer.user);
+  const [form, setValue] = useState<TUserData>({
+    name: '',
+    password: '',
+    email: '',
+  });
   const [changed, setChanged] = useState(false);
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({ ...form, [e.target.name]: e.target.value });
@@ -103,10 +108,10 @@ function Profile() {
           />
         </div>
         <div className={stylesProfile.buttons}>
-          <div  style={inactiveButtonStyle}>
-          <Button type="primary" size="medium">
-            Сохранить
-          </Button>
+          <div style={inactiveButtonStyle}>
+            <Button type="primary" size="medium">
+              Сохранить
+            </Button>
           </div>
           <Button onClick={cancelClick} type="secondary">
             Отмена

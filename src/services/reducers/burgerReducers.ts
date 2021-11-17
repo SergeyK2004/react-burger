@@ -8,15 +8,24 @@ import {
   CHANGE_INGREDIENT,
   ORDER_CLEAR,
 } from '../actions';
+import { TBurgerActions } from '../actions/burgerActions';
+import { TItem } from '../../utils/types';
 
-const initialState = {
+type TBurgerState = {
+  ingredients: Array<TItem>;
+  constructor: Array<TItem>;
+  ingredient: TItem | {};
+  order: number;
+};
+
+const initialState: TBurgerState = {
   ingredients: [],
   constructor: [],
   ingredient: {},
   order: 0,
 };
 
-export const burgerReducer = (state = initialState, action) => {
+export const burgerReducer = (state = initialState, action: TBurgerActions): TBurgerState => {
   switch (action.type) {
     // загрузка ингредиентов с сервера
     case LOAD_INGREDIENTS:

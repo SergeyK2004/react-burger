@@ -1,9 +1,9 @@
 import React from 'react';
 import stylesOrderDetails from './OrderDetails.module.css';
 import imageDone from '../../images/done.svg';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../utils/hooks';
 function OrderDetails() {
-  const order = useSelector((store: any) => store.burgerReducer.order);
+  const order = useSelector((store) => store.burgerReducer.order);
   return (
     <div className={stylesOrderDetails.bigCard}>
       <p className={stylesOrderDetails.order + ' text text_type_digits-large'}>

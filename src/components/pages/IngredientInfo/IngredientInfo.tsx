@@ -1,12 +1,12 @@
 import React from 'react';
 import stylesIngredientInfo from './IngredientInfo.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../utils/hooks';
 import { useParams } from 'react-router-dom';
 import { TItem } from '../../../utils/types';
 
 function IngredientInfo() {
-  const { id } = useParams<{id?: string}>();
-  const items = useSelector((store: any) => store.burgerReducer.ingredients);
+  const { id } = useParams<{ id?: string }>();
+  const items = useSelector((store) => store.burgerReducer.ingredients);
   const item = items.find((el: TItem) => el._id === id);
 
   if (!item) {

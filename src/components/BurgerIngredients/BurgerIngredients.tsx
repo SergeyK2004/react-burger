@@ -1,17 +1,18 @@
-import React, { ReactElement, FunctionComponent, ReactNode } from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesBurgerIngredients from './BurgerIngredients.module.css';
 import Ingredient from '../Ingredient/Ingredient';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../utils/hooks';
 import { TItem } from '../../utils/types';
 
 interface IBurgerIngredientsProps {
   onModalOpen: (modalChild: ReactNode, modalHeader: string) => void;
 }
 
-const  BurgerIngredients: FunctionComponent<IBurgerIngredientsProps> = ({ onModalOpen }) => {
-  const data = useSelector((store: any) => store.burgerReducer.ingredients);
+const BurgerIngredients: FunctionComponent<IBurgerIngredientsProps> = ({
+  onModalOpen,
+}) => {
+  const data = useSelector((store) => store.burgerReducer.ingredients);
   const [current, setCurrent] = React.useState('bun');
   const bunArray = data.filter((item: TItem) => item.type === 'bun');
   const mainArray = data.filter((item: TItem) => item.type === 'main');
@@ -112,7 +113,6 @@ const  BurgerIngredients: FunctionComponent<IBurgerIngredientsProps> = ({ onModa
       </div>
     </section>
   );
-}
+};
 
 export default BurgerIngredients;
-

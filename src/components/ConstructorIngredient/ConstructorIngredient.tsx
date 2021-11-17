@@ -6,17 +6,21 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrop, useDrag } from 'react-dnd';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../utils/hooks';
 import { DELETE_INGREDIENT } from '../../services/actions';
 import { TItem } from '../../utils/types';
 
-interface IConstructorIngredientProps  {
+interface IConstructorIngredientProps {
   item: TItem;
   index: number;
   moveElement: (dragIndex: number, hoverIndex: number) => void;
 }
 
-const ConstructorIngredient: FunctionComponent<IConstructorIngredientProps> = ({ item, index, moveElement }) => {
+const ConstructorIngredient: FunctionComponent<IConstructorIngredientProps> = ({
+  item,
+  index,
+  moveElement,
+}) => {
   const ref = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
 
@@ -82,7 +86,6 @@ const ConstructorIngredient: FunctionComponent<IConstructorIngredientProps> = ({
       />
     </div>
   );
-}
+};
 
 export default ConstructorIngredient;
-

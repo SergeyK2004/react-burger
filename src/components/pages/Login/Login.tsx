@@ -7,19 +7,19 @@ import {
 import { login } from '../../../services/actions/authActions';
 import stylesLogin from './Login.module.css';
 import stylesGlobal from '../../../utils/global.module.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../../utils/hooks';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 // import { LOGIN_USER } from '../../services/actions';
 
 type TLocationState = {
   background: Location;
   from: Location;
-}
+};
 
 function Login() {
   const [form, setValue] = useState({ email: '', password: '' });
   const dispatch = useDispatch();
-  const auth = useSelector((store: any) => store.authReducer.isAuthorized);
+  const auth = useSelector((store) => store.authReducer.isAuthorized);
   let location = useLocation<TLocationState>();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

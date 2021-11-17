@@ -1,15 +1,32 @@
 import { authApiURL } from '../../utils/const';
 import { LOGIN_USER, REGISTER_USER, LOGOUT_USER, CHEK_TOKEN } from './index';
+import { TUserData } from '../../utils/types';
+import { AppDispatch } from '../../utils/types';
 
-// type TUserData = {
-//   email: string,
-//   password: string,
-//   name?: string,
+export interface ILoginUserAction {
+  readonly type: typeof LOGIN_USER;
+  readonly data: TUserData;
+}
+export interface IRegisterUserAction {
+  readonly type: typeof REGISTER_USER;
+  readonly data: TUserData;
+}
+export interface ILogoutUserAction {
+  readonly type: typeof LOGOUT_USER;
+}
+export interface IChekTokenAction {
+  readonly type: typeof CHEK_TOKEN;
+  readonly data: TUserData;
+}
 
-// }
+export type TAuthActions =
+  | ILoginUserAction
+  | IRegisterUserAction
+  | ILogoutUserAction
+  | IChekTokenAction;
 
-export function login(data) {
-  return function (dispatch) {
+export function login(data: TUserData) {
+  return function (dispatch: AppDispatch) {
     fetch(`${authApiURL}/login`, {
       method: 'POST',
       headers: {
@@ -27,7 +44,7 @@ export function login(data) {
           localStorage.setItem('refreshToken', answer.refreshToken);
           dispatch({
             type: LOGIN_USER,
-            data: answer,
+            data: answer.user,
           });
         } else {
           return Promise.reject(`Ошибка данных`);
@@ -38,8 +55,8 @@ export function login(data) {
       });
   };
 }
-export function register(data) {
-  return function (dispatch) {
+export function register(data: TUserData) {
+  return function (dispatch: AppDispatch) {
     fetch(`${authApiURL}/register`, {
       method: 'POST',
       headers: {
@@ -58,7 +75,7 @@ export function register(data) {
           localStorage.setItem('refreshToken', answer.refreshToken);
           dispatch({
             type: REGISTER_USER,
-            data: answer,
+            data: answer.user,
           });
         } else {
           return Promise.reject(`Ошибка данных`);
@@ -71,7 +88,7 @@ export function register(data) {
 }
 
 export function logout() {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     fetch(`${authApiURL}/logout`, {
       method: 'POST',
       headers: {
@@ -99,7 +116,7 @@ export function logout() {
   };
 }
 export function getUser() {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     fetchWithRefresh(`${authApiURL}/user`, {
       method: 'GET',
       headers: {
@@ -111,7 +128,7 @@ export function getUser() {
         if (answer.success) {
           dispatch({
             type: CHEK_TOKEN,
-            data: answer,
+            data: answer.user,
           });
         } else {
           return Promise.reject(`Ошибка данных`);
@@ -122,8 +139,8 @@ export function getUser() {
       });
   };
 }
-export function patchUser(data) {
-  return function (dispatch) {
+export function patchUser(data: TUserData) {
+  return function (dispatch: AppDispatch) {
     fetchWithRefresh(`${authApiURL}/user`, {
       method: 'PATCH',
       headers: {
@@ -140,7 +157,7 @@ export function patchUser(data) {
         if (answer.success) {
           dispatch({
             type: CHEK_TOKEN,
-            data: answer,
+            data: answer.user,
           });
         } else {
           return Promise.reject(`Ошибка данных`);
@@ -167,8 +184,10 @@ export const refreshToken = () => {
     }),
   }).then(checkReponse);
 };
+type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
+type MyRequestInit = Overwrite<RequestInit, {headers: Record<string, string>  }>;
 
-export const fetchWithRefresh = async (url, options) => {
+export const fetchWithRefresh = async (url: string, options: MyRequestInit) => {
   try {
     const res = await fetch(url, options);
     return await checkReponse(res);
@@ -186,7 +205,7 @@ export const fetchWithRefresh = async (url, options) => {
   }
 };
 
-export function setCookie(name, value, props = {}) {
+export function setCookie(name: string, value: string, props: any = {}) {
   props = props || {};
   props = {
     path: '/',
@@ -214,7 +233,7 @@ export function setCookie(name, value, props = {}) {
   document.cookie = updatedCookie;
 }
 
-export function getCookie(name) {
+export function getCookie(name: string) {
   const matches = document.cookie.match(
     new RegExp(
       '(?:^|; )' +
@@ -224,7 +243,7 @@ export function getCookie(name) {
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
-function deleteCookie(name) {
+function deleteCookie(name: string) {
   setCookie(name, '', {
     'max-age': -1,
   });

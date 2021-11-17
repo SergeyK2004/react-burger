@@ -8,12 +8,12 @@ import stylesGlobal from '../../../utils/global.module.css';
 import { Link } from 'react-router-dom';
 import { useHistory, Redirect } from 'react-router-dom';
 import { forgotPassword } from '../../../utils/auth';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../utils/hooks';
 
 function ForgotPassword() {
   const [form, setValue] = useState({ email: '' });
   const history = useHistory();
-  const auth = useSelector((store: any) => store.authReducer.isAuthorized);
+  const auth = useSelector((store) => store.authReducer.isAuthorized);
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
@@ -51,13 +51,9 @@ function ForgotPassword() {
           Восстановление пароля
         </h1>
         <div className={'mb-6'}>
-          <EmailInput
-            value={form.email}
-            name="email"
-            onChange={onChange}
-          />
+          <EmailInput value={form.email} name="email" onChange={onChange} />
         </div>
-        <Button type='primary'>Восстановить</Button>
+        <Button type="primary">Восстановить</Button>
       </form>
       <div className={stylesForgotPassword.footerLine}>
         <p className={'text text_type_main-default text_color_inactive'}>
