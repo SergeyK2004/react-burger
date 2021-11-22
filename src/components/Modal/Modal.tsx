@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, ReactNode, ReactPortal } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import stylesModal from './Modal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
@@ -11,7 +11,11 @@ interface IModalProps {
   header?: string;
 }
 
-const Modal: FunctionComponent<IModalProps> = ({ children, onClose, header = '' }) => {
+const Modal: FunctionComponent<IModalProps> = ({
+  children,
+  onClose,
+  header = '',
+}) => {
   function onOverlayClick() {
     onClose();
   }
@@ -30,7 +34,7 @@ const Modal: FunctionComponent<IModalProps> = ({ children, onClose, header = '' 
     };
   }, []);
 
-    if (!modalRoot) {
+  if (!modalRoot) {
     return null;
   }
 
@@ -49,6 +53,6 @@ const Modal: FunctionComponent<IModalProps> = ({ children, onClose, header = '' 
     </>,
     modalRoot
   );
-}
+};
 
 export default Modal;

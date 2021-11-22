@@ -1,4 +1,4 @@
-import React, { useEffect, ReactElement, ReactNode } from 'react';
+import React, { useEffect, ReactNode } from 'react';
 import stylesApp from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
@@ -17,6 +17,9 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import IngredientInfo from '../pages/IngredientInfo/IngredientInfo';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import { Location } from 'history';
+import Feed from '../pages/Feed/Feed';
+import OrderComposition from '../OrderComposition/OrderComposition';
+import OrdersHistory from '../pages/OrdersHistory/OrdersHistory';
 
 type TLocationState = {
   background: Location;
@@ -32,6 +35,8 @@ function App() {
   let background;
   const ingredientModalChild = <IngredientDetails />;
   const ingredientModalHeader = 'Детали ингредиента';
+  const orderModalChild = <OrderComposition />;
+  const orderModalHeader = '';
 
   if (history.action === 'PUSH' || history.action === 'REPLACE') {
     background = location.state && location.state.background;
@@ -71,6 +76,28 @@ function App() {
             </Modal>
           )}
         </Route>
+        <Route path="/feed" exact>
+          <AppHeader />
+          <Feed onModalOpen={onModalOpen} />
+          {modalIsOpen && (
+            <Modal onClose={onModalClose} header={modalHeader}>
+              {modalChild}
+            </Modal>
+          )}
+        </Route>
+        <ProtectedRoute path="/profile/orders" exact>
+          <AppHeader />
+          <OrdersHistory onModalOpen={onModalOpen} />
+          {modalIsOpen && (
+            <Modal onClose={onModalClose} header={modalHeader}>
+              {modalChild}
+            </Modal>
+          )}
+        </ProtectedRoute>
+        <ProtectedRoute path="/profile/orders/:id">
+          <AppHeader />
+          <OrderComposition />
+        </ProtectedRoute>
         <Route path="/login">
           <AppHeader />
           <Login />
@@ -95,6 +122,10 @@ function App() {
           <AppHeader />
           <IngredientInfo />
         </Route>
+        <Route path="/feed/:id">
+          <AppHeader />
+          <OrderComposition />
+        </Route>
         <Route path="/">
           <AppHeader />
           <Page404 />
@@ -112,6 +143,20 @@ function App() {
             {ingredientModalChild}
           </Modal>
         </Route>
+      )}
+      {background && (
+        <Route path="/feed/:id">
+          <Modal onClose={onIngredientModalClose} header={orderModalHeader}>
+            {orderModalChild}
+          </Modal>
+        </Route>
+      )}
+      {background && (
+        <ProtectedRoute path="/profile/orders/:id">
+          <Modal onClose={onIngredientModalClose} header={orderModalHeader}>
+            {orderModalChild}
+          </Modal>
+        </ProtectedRoute>
       )}
     </div>
   );

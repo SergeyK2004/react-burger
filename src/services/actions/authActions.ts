@@ -169,7 +169,7 @@ export function patchUser(data: TUserData) {
   };
 }
 
-const checkReponse = (res) => {
+const checkReponse = (res: Response) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
@@ -184,6 +184,7 @@ export const refreshToken = () => {
     }),
   }).then(checkReponse);
 };
+
 type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
 type MyRequestInit = Overwrite<RequestInit, {headers: Record<string, string>  }>;
 
@@ -191,7 +192,7 @@ export const fetchWithRefresh = async (url: string, options: MyRequestInit) => {
   try {
     const res = await fetch(url, options);
     return await checkReponse(res);
-  } catch (err) {
+  } catch (err: any) {
     if (err.message === 'jwt expired') {
       const refreshData = await refreshToken(); //обновляем токен
       localStorage.setItem('refreshToken', refreshData.refreshToken);
@@ -241,7 +242,7 @@ export function getCookie(name: string) {
         '=([^;]*)'
     )
   );
-  return matches ? decodeURIComponent(matches[1]) : undefined;
+  return matches ? decodeURIComponent(matches[1]) : '';
 }
 function deleteCookie(name: string) {
   setCookie(name, '', {

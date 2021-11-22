@@ -1,6 +1,6 @@
 import { apiURL } from '../../utils/const';
 import {
-    LOAD_INGREDIENTS,
+  LOAD_INGREDIENTS,
   LOAD_DETAILS,
   DELETE_DETAILS,
   ORDER_NUMBER,
@@ -13,7 +13,7 @@ import {
 import { apiOrderURL } from '../../utils/const';
 import { TItem } from '../../utils/types';
 import { AppDispatch } from '../../utils/types';
-
+import { getCookie } from './authActions';
 export interface ILoadDetailsAction {
   readonly type: typeof LOAD_DETAILS;
   readonly item: TItem;
@@ -93,6 +93,7 @@ export function postOrder(data: Array<TItem>) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
+        authorization: getCookie('accessToken'),
       },
       body: JSON.stringify({
         ingredients: orderArray,

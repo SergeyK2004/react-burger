@@ -21,16 +21,33 @@ export type TUserData = {
   name?: string,
 }
 
+export type TOrderRow = {
+  ingredients: Array<string>,
+  _id: string,
+  status: 'created' | 'done' | 'pending',
+  number: number,
+  createdAt: string,
+  updatedAt: string,
+  name: string,
+}
+export type TOrders = {
+  success: boolean,
+  orders: Array<TOrderRow>,
+  total: number,
+  totalToday: number,
+}
+
 import { store } from '../index';
 import { TAuthActions } from '../services/actions/authActions';
 import { ThunkAction } from 'redux-thunk';
 import { Action, ActionCreator } from 'redux';
 import { TBurgerActions } from '../services/actions/burgerActions';
+import { TWSActions } from '../services/actions/wsActions';
 
 export type RootState = ReturnType<typeof store.getState>;
 
 // Типизация всех экшенов приложения
-type TApplicationActions = TAuthActions | TBurgerActions;
+export type TApplicationActions = TAuthActions | TBurgerActions | TWSActions;
 
 // Типизация thunk'ов в нашем приложении
 export type AppThunk<TReturn = void> = ActionCreator<

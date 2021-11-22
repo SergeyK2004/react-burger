@@ -1,0 +1,24 @@
+.chapter {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--offset-base-size) * 4);
+    flex: 1 1;
+    overflow-y: scroll;
+}
+
+.orders {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 250px);
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.chapter::-webkit-scrollbar {
+    width: 8px;
+    background-color: #2f2f37;
+}
+
+.chapter::-webkit-scrollbar-thumb {
+    background-color: #8585ad;
+}

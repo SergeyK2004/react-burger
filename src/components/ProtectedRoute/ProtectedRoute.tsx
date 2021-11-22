@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from '../../utils/hooks';
 interface IProtectedRouteProps {
   children: ReactNode;
   path: string;
+  exact?: boolean;
 }
 
 const ProtectedRoute: FunctionComponent<IProtectedRouteProps> = ({
@@ -21,7 +22,9 @@ const ProtectedRoute: FunctionComponent<IProtectedRouteProps> = ({
   };
 
   useEffect(() => {
-    init();
+    if (!auth) {
+      init();
+    }
   }, []);
 
   if (!isUserLoaded) {
