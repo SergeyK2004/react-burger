@@ -29,13 +29,12 @@ export const socketMiddleware = (): Middleware => {
         let socket: WebSocket | null = null;
 
     return next => (action: TWSActions) => {
-      const { dispatch, getState } = store;
+      const { dispatch } = store;
       const { type, payload} = action;
       const { wsInit, wsClose, wsSendMessage, onOpen, onClose, onError, onMessage } = wsActions;
  
       if (type === wsInit) {
             // объект класса WebSocket
-        console.log(action);
         socket = new WebSocket(payload);
       }
       if (type === wsClose) {

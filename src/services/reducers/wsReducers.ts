@@ -1,5 +1,5 @@
 import { TOrders } from '../../utils/types';
-import { WS_CONNECTION_START, WS_CONNECTION_SUCCESS, WS_CONNECTION_ERROR, WS_CONNECTION_CLOSED, WS_GET_MESSAGE, WS_SEND_MESSAGE } from '../actions/index';
+import { WS_CONNECTION_SUCCESS, WS_CONNECTION_ERROR, WS_CONNECTION_CLOSED, WS_GET_MESSAGE } from '../actions/index';
 import type { TWSActions } from '../actions/wsActions';
 
 type TWSState = {

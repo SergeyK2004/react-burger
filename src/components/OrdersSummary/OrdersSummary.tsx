@@ -1,22 +1,6 @@
-import React, { FunctionComponent, ReactNode, useReducer } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import styles from './OrdersSummary.module.css';
-import { useHistory } from 'react-router-dom';
-import {
-  CurrencyIcon,
-  ConstructorElement,
-  Button,
-} from '@ya.praktikum/react-developer-burger-ui-components';
-import OrderDetails from '../OrderDetails/OrderDetails';
-import { useSelector, useDispatch } from '../../utils/hooks';
-import { postOrder } from '../../services/actions/burgerActions';
-import {
-  ADD_INGREDIENT,
-  CHANGE_INGREDIENT,
-  DELETE_INGREDIENT,
-} from '../../services/actions';
-import ConstructorIngredient from '../ConstructorIngredient/ConstructorIngredient';
-import { TItem, TOrders } from '../../utils/types';
-const initialState = { total: 0 };
+import { TOrders } from '../../utils/types';
 
 interface IOrdersSummaryProps {
   onModalOpen: (modalChild: ReactNode, modalHeader: string) => void;

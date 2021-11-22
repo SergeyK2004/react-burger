@@ -2,6 +2,7 @@ import { getUser } from '../../services/actions/authActions';
 import { Route, Redirect } from 'react-router-dom';
 import { FunctionComponent, ReactNode, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from '../../utils/hooks';
+import Preloader from '../pages/Preloader/Preloader';
 
 interface IProtectedRouteProps {
   children: ReactNode;
@@ -22,13 +23,11 @@ const ProtectedRoute: FunctionComponent<IProtectedRouteProps> = ({
   };
 
   useEffect(() => {
-    if (!auth) {
-      init();
-    }
+    init();
   }, []);
 
   if (!isUserLoaded) {
-    return null;
+    return <Preloader />;
   }
 
   return (

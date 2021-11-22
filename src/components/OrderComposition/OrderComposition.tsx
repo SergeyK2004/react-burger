@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './OrderComposition.module.css';
 import { useParams } from 'react-router-dom';
 import { useSelector } from '../../utils/hooks';
-import { TItem, TOrderRow } from '../../utils/types';
+import { TOrderRow } from '../../utils/types';
 import { format, formatDistanceToNow, isToday, isYesterday } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -115,6 +115,7 @@ function OrderComposition() {
           return (
             <div key={index} className={styles.row}>
               <img
+                alt="Фото"
                 src={el.image_mobile}
                 className={styles.image + ' mr-6'}
               ></img>

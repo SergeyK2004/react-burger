@@ -6,7 +6,6 @@ import { format, formatDistanceToNow, isToday, isYesterday } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from '../../utils/hooks';
-import { TItem } from '../../utils/types';
 
 interface IOrderProps {
   data: TOrderRow;
@@ -85,6 +84,7 @@ const Order: FC<IOrderProps> = ({ data, onModalOpen, path }) => {
             return (
               <>
                 <img
+                  alt="Фото"
                   key={index}
                   src={el.image_mobile}
                   className={styles.image}

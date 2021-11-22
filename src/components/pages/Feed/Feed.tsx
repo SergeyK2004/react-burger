@@ -1,7 +1,6 @@
 import React, { FC, ReactNode, useEffect } from 'react';
 import styles from './Feed.module.css';
 import FeedContent from '../../FeedContent/FeedContent';
-import { TOrders } from '../../../utils/types';
 import OrdersSummary from '../../OrdersSummary/OrdersSummary';
 import { useDispatch, useSelector } from '../../../utils/hooks';
 import {
@@ -9,6 +8,7 @@ import {
   WS_CONNECTION_CLOSE,
 } from '../../../services/actions';
 import { wsApiOrderURL } from '../../../utils/const';
+import Preloader from '../Preloader/Preloader';
 
 interface IFeedProps {
   onModalOpen: (modalChild: ReactNode, modalHeader: string) => void;
@@ -29,6 +29,10 @@ const Feed: FC<IFeedProps> = ({ onModalOpen }) => {
       });
     };
   }, []);
+
+  if (!recivedData.success) {
+    return <Preloader />;
+  }
   return (
     <div className={styles.main}>
       <div className={styles.feed + ' mr-10'}>

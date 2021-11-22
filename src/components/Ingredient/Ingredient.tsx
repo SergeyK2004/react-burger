@@ -1,5 +1,4 @@
-import React, {FunctionComponent, ReactElement, ReactNode} from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent, ReactNode } from 'react';
 import {
   CurrencyIcon,
   Counter,
@@ -14,8 +13,10 @@ interface IIngredientProps {
   onModalOpen: (modalChild: ReactNode, modalHeader: string) => void;
 }
 
-
-const  Ingredient: FunctionComponent<IIngredientProps> = ({ item, onModalOpen }) => {
+const Ingredient: FunctionComponent<IIngredientProps> = ({
+  item,
+  onModalOpen,
+}) => {
   const history = useHistory();
   let location = useLocation();
   function onClick() {
@@ -41,6 +42,6 @@ const  Ingredient: FunctionComponent<IIngredientProps> = ({ item, onModalOpen })
       </div>
     </div>
   );
-}
+};
 
 export default Ingredient;

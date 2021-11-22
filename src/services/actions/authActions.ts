@@ -117,7 +117,7 @@ export function logout() {
 }
 export function getUser() {
   return function (dispatch: AppDispatch) {
-    fetchWithRefresh(`${authApiURL}/user`, {
+    return fetchWithRefresh(`${authApiURL}/user`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

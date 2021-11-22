@@ -1,9 +1,6 @@
 import React, { FC, ReactNode } from 'react';
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './FeedContent.module.css';
-import Ingredient from '../Ingredient/Ingredient';
-import { useSelector } from '../../utils/hooks';
-import { TItem, TOrders } from '../../utils/types';
+import { TOrders } from '../../utils/types';
 import Order from '../Order/Order';
 
 interface IFeedContentProps {
@@ -17,8 +14,6 @@ const FeedContent: FC<IFeedContentProps> = ({
   recivedData,
   path,
 }) => {
-  const data = useSelector((store) => store.burgerReducer.ingredients);
-
   return (
     <section className={styles.section}>
       <div className={styles.orders}>
