@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { FunctionComponent, ReactNode, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import stylesModal from './Modal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
@@ -20,19 +20,22 @@ const Modal: FunctionComponent<IModalProps> = ({
     onClose();
   }
 
-  function onPressEsc(evt: KeyboardEvent) {
-    if (evt.key === 'Escape') {
-      evt.preventDefault();
-      onClose();
-    }
-  }
+  const onPressEsc = useCallback(
+    (evt: KeyboardEvent) => {
+      if (evt.key === 'Escape') {
+        evt.preventDefault();
+        onClose();
+      }
+    },
+    [onClose]
+  );
 
   React.useEffect(() => {
     document.addEventListener('keydown', onPressEsc);
     return () => {
       document.removeEventListener('keydown', onPressEsc);
     };
-  }, []);
+  }, [onPressEsc]);
 
   if (!modalRoot) {
     return null;

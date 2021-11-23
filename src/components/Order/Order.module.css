@@ -50,6 +50,17 @@
     position: relative;
 }
 
+.circles {
+    width: 62px;
+    height: 62px;
+    left: 0px;
+    top: 0px;
+    object-fit: cover;
+    position: relative;
+    box-sizing: border-box;
+
+}
+
 .image {
     width: 64px;
     height: 64px;

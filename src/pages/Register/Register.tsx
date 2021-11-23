@@ -11,10 +11,10 @@ import {
   EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesRegister from './Register.module.css';
-import stylesGlobal from '../../../utils/global.module.css';
+import stylesGlobal from '../../utils/global.module.css';
 import { Link, useHistory, Redirect } from 'react-router-dom';
-import { register } from '../../../services/actions/authActions';
-import { useSelector, useDispatch } from '../../../utils/hooks';
+import { register } from '../../services/actions/authActions';
+import { useSelector, useDispatch } from '../../utils/hooks';
 
 interface IRegisterProps {
   state?: {
@@ -37,13 +37,13 @@ const Register: FunctionComponent<IRegisterProps> = (props) => {
       e.preventDefault();
       dispatch(register(form));
     },
-    [form]
+    [form, dispatch]
   );
   useEffect(() => {
     if (auth) {
       history.replace({ pathname: '/' });
     }
-  }, [auth]);
+  }, [history, auth]);
 
   if (auth) {
     return (

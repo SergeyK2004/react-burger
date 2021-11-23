@@ -5,10 +5,10 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesResetPassword from './ResetPassword.module.css';
-import stylesGlobal from '../../../utils/global.module.css';
+import stylesGlobal from '../../utils/global.module.css';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { resetPassword } from '../../../utils/auth';
+import { resetPassword } from '../../utils/auth';
 
 function ResetPassword() {
   const [form, setValue] = useState({ code: '', password: '' });

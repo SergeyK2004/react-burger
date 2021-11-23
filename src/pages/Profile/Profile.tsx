@@ -13,9 +13,9 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesProfile from './Profile.module.css';
 import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from '../../../utils/hooks';
-import { patchUser, logout } from '../../../services/actions/authActions';
-import { TUserData } from '../../../utils/types';
+import { useSelector, useDispatch } from '../../utils/hooks';
+import { patchUser, logout } from '../../services/actions/authActions';
+import { TUserData } from '../../utils/types';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ function Profile() {
   }
   useEffect(() => {
     setValue(user);
-  }, []);
+  }, [user]);
 
   const inactiveButtonStyle = changed
     ? {}

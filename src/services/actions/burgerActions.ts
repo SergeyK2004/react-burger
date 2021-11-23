@@ -1,4 +1,4 @@
-import { apiURL } from '../../utils/const';
+import { BASE_URL } from '../../utils/const';
 import {
   LOAD_INGREDIENTS,
   LOAD_DETAILS,
@@ -10,7 +10,6 @@ import {
   ORDER_CLEAR,
 
  } from './index';
-import { apiOrderURL } from '../../utils/const';
 import { TItem } from '../../utils/types';
 import { AppDispatch } from '../../utils/types';
 import { getCookie } from './authActions';
@@ -63,7 +62,7 @@ export type TBurgerActions =
 
 export function getData() {
   return function (dispatch: AppDispatch) {
-    fetch(apiURL)
+    fetch(BASE_URL+'/ingredients')
       .then((answer) => {
         if (answer.ok) {
           return answer.json();
@@ -89,7 +88,7 @@ export function getData() {
 export function postOrder(data: Array<TItem>) {
   return async function (dispatch: AppDispatch) {
     const orderArray = data.map((item) => item._id);
-    const response = await fetch(apiOrderURL, {
+    const response = await fetch(BASE_URL + '/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',

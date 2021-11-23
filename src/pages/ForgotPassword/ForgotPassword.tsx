@@ -4,11 +4,11 @@ import {
   EmailInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import stylesForgotPassword from './ForgotPassword.module.css';
-import stylesGlobal from '../../../utils/global.module.css';
+import stylesGlobal from '../../utils/global.module.css';
 import { Link } from 'react-router-dom';
 import { useHistory, Redirect } from 'react-router-dom';
-import { forgotPassword } from '../../../utils/auth';
-import { useSelector } from '../../../utils/hooks';
+import { forgotPassword } from '../../utils/auth';
+import { useSelector } from '../../utils/hooks';
 
 function ForgotPassword() {
   const [form, setValue] = useState({ email: '' });

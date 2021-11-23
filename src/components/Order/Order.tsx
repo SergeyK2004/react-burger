@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import type { TOrderRow } from '../../utils/types';
+import { TItem, TOrderRow } from '../../utils/types';
 import styles from './Order.module.css';
 import { format, formatDistanceToNow, isToday, isYesterday } from 'date-fns';
 import { ru } from 'date-fns/locale';
@@ -40,11 +40,14 @@ const Order: FC<IOrderProps> = ({ data, onModalOpen, path }) => {
     (store) => store.burgerReducer.ingredients
   );
 
-  const ingredientsArray = data.ingredients.map((el) => {
+  let ingredientsArray: Array<TItem> = [];
+  data.ingredients.forEach((el) => {
     const indexOfIngredient = ingredientsData.findIndex(
       (item) => item._id === el
     );
-    if (indexOfIngredient >= 0) return ingredientsData[indexOfIngredient];
+    if (indexOfIngredient >= 0) {
+      ingredientsArray.push(ingredientsData[indexOfIngredient]);
+    }
   });
 
   let price = 0;
@@ -75,29 +78,27 @@ const Order: FC<IOrderProps> = ({ data, onModalOpen, path }) => {
         <div className={styles.ingredients}>
           {ingredientsArray.map((el, index) => {
             if (!el || index > 5) {
-              return <div key={index}></div>;
+              return null;
             }
             let remains = '';
             if (index === 5 && ingredientsArray.length > 6) {
               remains = '+' + (ingredientsArray.length - 5);
             }
             return (
-              <>
+              <div className={styles.image} key={index.toString()}>
                 <img
                   alt="Фото"
-                  key={index}
                   src={el.image_mobile}
-                  className={styles.image}
+                  className={styles.circles}
                 ></img>
                 {remains && (
                   <p
-                    key={'p' + index}
                     className={styles.remains + ' text text_type_main-default'}
                   >
                     {remains}
                   </p>
                 )}
-              </>
+              </div>
             );
           })}
         </div>

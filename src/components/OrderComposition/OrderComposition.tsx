@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './OrderComposition.module.css';
 import { useParams } from 'react-router-dom';
 import { useSelector } from '../../utils/hooks';
-import { TOrderRow } from '../../utils/types';
+import { TItem, TOrderRow } from '../../utils/types';
 import { format, formatDistanceToNow, isToday, isYesterday } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -36,7 +36,7 @@ function OrderComposition() {
         }
       });
     }
-  }, []);
+  }, [id, items]);
 
   if (!item) {
     return null;
@@ -56,11 +56,14 @@ function OrderComposition() {
   }
   stringOfDate += format(Date.parse(item.createdAt), 'HH:mm zzz');
 
-  const ingredientsArray = item.ingredients.map((el) => {
+  let ingredientsArray: Array<TItem> = [];
+  item.ingredients.forEach((el) => {
     const indexOfIngredient = ingredientsData.findIndex(
       (item) => item._id === el
     );
-    if (indexOfIngredient >= 0) return ingredientsData[indexOfIngredient];
+    if (indexOfIngredient >= 0) {
+      ingredientsArray.push(ingredientsData[indexOfIngredient]);
+    }
   });
 
   let price = 0;

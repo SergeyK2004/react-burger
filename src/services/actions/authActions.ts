@@ -1,4 +1,4 @@
-import { authApiURL } from '../../utils/const';
+import { BASE_URL } from '../../utils/const';
 import { LOGIN_USER, REGISTER_USER, LOGOUT_USER, CHEK_TOKEN } from './index';
 import { TUserData } from '../../utils/types';
 import { AppDispatch } from '../../utils/types';
@@ -27,7 +27,7 @@ export type TAuthActions =
 
 export function login(data: TUserData) {
   return function (dispatch: AppDispatch) {
-    fetch(`${authApiURL}/login`, {
+    fetch(`${BASE_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -57,7 +57,7 @@ export function login(data: TUserData) {
 }
 export function register(data: TUserData) {
   return function (dispatch: AppDispatch) {
-    fetch(`${authApiURL}/register`, {
+    fetch(`${BASE_URL}/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -89,7 +89,7 @@ export function register(data: TUserData) {
 
 export function logout() {
   return function (dispatch: AppDispatch) {
-    fetch(`${authApiURL}/logout`, {
+    fetch(`${BASE_URL}/auth/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -117,7 +117,7 @@ export function logout() {
 }
 export function getUser() {
   return function (dispatch: AppDispatch) {
-    return fetchWithRefresh(`${authApiURL}/user`, {
+    return fetchWithRefresh(`${BASE_URL}/auth/user`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -141,7 +141,7 @@ export function getUser() {
 }
 export function patchUser(data: TUserData) {
   return function (dispatch: AppDispatch) {
-    fetchWithRefresh(`${authApiURL}/user`, {
+    fetchWithRefresh(`${BASE_URL}/auth/user`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -174,7 +174,7 @@ const checkReponse = (res: Response) => {
 };
 
 export const refreshToken = () => {
-  return fetch(`${authApiURL}/token`, {
+  return fetch(`${BASE_URL}/auth/token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',

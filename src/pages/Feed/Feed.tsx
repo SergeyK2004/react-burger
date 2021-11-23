@@ -1,13 +1,13 @@
 import React, { FC, ReactNode, useEffect } from 'react';
 import styles from './Feed.module.css';
-import FeedContent from '../../FeedContent/FeedContent';
-import OrdersSummary from '../../OrdersSummary/OrdersSummary';
-import { useDispatch, useSelector } from '../../../utils/hooks';
+import FeedContent from '../../components/FeedContent/FeedContent';
+import OrdersSummary from '../../components/OrdersSummary/OrdersSummary';
+import { useDispatch, useSelector } from '../../utils/hooks';
 import {
   WS_CONNECTION_START,
   WS_CONNECTION_CLOSE,
-} from '../../../services/actions';
-import { wsApiOrderURL } from '../../../utils/const';
+} from '../../services/actions';
+import { wsApiOrderURL } from '../../utils/const';
 import Preloader from '../Preloader/Preloader';
 
 interface IFeedProps {
@@ -28,7 +28,7 @@ const Feed: FC<IFeedProps> = ({ onModalOpen }) => {
         type: WS_CONNECTION_CLOSE,
       });
     };
-  }, []);
+  }, [dispatch]);
 
   if (!recivedData.success) {
     return <Preloader />;

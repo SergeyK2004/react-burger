@@ -1,8 +1,8 @@
 import React from 'react';
 import stylesIngredientInfo from './IngredientInfo.module.css';
-import { useSelector } from '../../../utils/hooks';
+import { useSelector } from '../../utils/hooks';
 import { useParams } from 'react-router-dom';
-import { TItem } from '../../../utils/types';
+import { TItem } from '../../utils/types';
 
 function IngredientInfo() {
   const { id } = useParams<{ id?: string }>();

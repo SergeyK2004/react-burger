@@ -31,6 +31,8 @@ const OrdersSummary: FunctionComponent<IOrdersSummaryProps> = ({
                     {String(item.number).padStart(6, '0')}
                   </p>
                 );
+              } else {
+                return null;
               }
             })}
           </div>
@@ -48,6 +50,8 @@ const OrdersSummary: FunctionComponent<IOrdersSummaryProps> = ({
                   {String(item.number).padStart(6, '0')}
                 </p>
               );
+            } else {
+              return null;
             }
           })}
         </div>

@@ -7,19 +7,19 @@ import Page404 from '../Page404/Page404';
 import { useDispatch } from '../../utils/hooks';
 import { getData } from '../../services/actions/burgerActions';
 import { DELETE_DETAILS } from '../../services/actions';
-import Login from '../pages/Login/Login';
-import Register from '../pages/Register/Register';
-import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
-import ResetPassword from '../pages/ResetPassword/ResetPassword';
-import Profile from '../pages/Profile/Profile';
+import Login from '../../pages/Login/Login';
+import Register from '../../pages/Register/Register';
+import ForgotPassword from '../../pages/ForgotPassword/ForgotPassword';
+import ResetPassword from '../../pages/ResetPassword/ResetPassword';
+import Profile from '../../pages/Profile/Profile';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import IngredientInfo from '../pages/IngredientInfo/IngredientInfo';
+import IngredientInfo from '../../pages/IngredientInfo/IngredientInfo';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import { Location } from 'history';
-import Feed from '../pages/Feed/Feed';
+import Feed from '../../pages/Feed/Feed';
 import OrderComposition from '../OrderComposition/OrderComposition';
-import OrdersHistory from '../pages/OrdersHistory/OrdersHistory';
+import OrdersHistory from '../../pages/OrdersHistory/OrdersHistory';
 
 type TLocationState = {
   background: Location;
@@ -131,9 +131,6 @@ function App() {
           <Page404 />
         </Route>
       </Switch>
-      {/* {background && (
-        <Route path="/ingredients/:id" children={<ModalIngredient />} />
-      )} */}
       {background && (
         <Route path="/ingredients/:id">
           <Modal

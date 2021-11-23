@@ -2,7 +2,7 @@ import React from 'react';
 import stylesOrderDetails from './OrderDetails.module.css';
 import imageDone from '../../images/done.svg';
 import { useSelector } from '../../utils/hooks';
-import Preloader from '../pages/Preloader/Preloader';
+import Preloader from '../../pages/Preloader/Preloader';
 function OrderDetails() {
   const order = useSelector((store) => store.burgerReducer.order);
 

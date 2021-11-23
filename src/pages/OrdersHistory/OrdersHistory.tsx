@@ -1,15 +1,15 @@
 import React, { FC, useEffect, MouseEvent, ReactNode } from 'react';
 import styles from './OrdersHistory.module.css';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from '../../../utils/hooks';
-import { logout } from '../../../services/actions/authActions';
+import { useSelector, useDispatch } from '../../utils/hooks';
+import { logout } from '../../services/actions/authActions';
 import {
   WS_CONNECTION_START,
   WS_CONNECTION_CLOSE,
-} from '../../../services/actions';
-import { wsUserApiOrderURL } from '../../../utils/const';
-import { getCookie } from '../../../services/actions/authActions';
-import FeedContent from '../../FeedContent/FeedContent';
+} from '../../services/actions';
+import { wsUserApiOrderURL } from '../../utils/const';
+import { getCookie } from '../../services/actions/authActions';
+import FeedContent from '../../components/FeedContent/FeedContent';
 
 interface IOrdersHistoryProps {
   onModalOpen: (modalChild: ReactNode, modalHeader: string) => void;
@@ -33,7 +33,7 @@ const OrdersHistory: FC<IOrdersHistoryProps> = ({ onModalOpen }) => {
         type: WS_CONNECTION_CLOSE,
       });
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={styles.main}>
