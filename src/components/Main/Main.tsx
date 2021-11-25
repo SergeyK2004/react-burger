@@ -1,5 +1,4 @@
-import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent, ReactNode } from 'react';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import stylesMain from './Main.module.css';
@@ -10,7 +9,7 @@ interface IMainProps {
   onModalOpen: (modalChild: ReactNode, modalHeader: string) => void;
 }
 
-const  Main: FunctionComponent<IMainProps> = ({ onModalOpen }) => {
+const Main: FunctionComponent<IMainProps> = ({ onModalOpen }) => {
   return (
     <div className={stylesMain.main}>
       <DndProvider backend={HTML5Backend}>
@@ -26,7 +25,6 @@ const  Main: FunctionComponent<IMainProps> = ({ onModalOpen }) => {
       </DndProvider>
     </div>
   );
-}
+};
 
 export default Main;
-

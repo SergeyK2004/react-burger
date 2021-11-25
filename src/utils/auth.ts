@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://norma.nomoreparties.space/api';
+import { BASE_URL } from "./const";
 
 export const autorize = (password: string, email: string) => {
   return fetch(`${BASE_URL}/signin`, {
@@ -55,6 +55,7 @@ export const resetPassword = (password: string, code: string) => {
     return response.json();
   });
 };
+
 export const chekToken = (token: string) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
@@ -62,6 +63,22 @@ export const chekToken = (token: string) => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
+    },
+  }).then((response) => {
+    if (!response.ok) {
+      return Promise.reject(`Ошибка: ${response.status}`);
+    }
+    return response.json();
+  });
+};
+
+
+export const getOrder = (number: number) => {
+  return fetch(`${BASE_URL}/orders/${number}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
   }).then((response) => {
     if (!response.ok) {

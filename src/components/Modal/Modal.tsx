@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, ReactNode, ReactPortal } from 'react';
+import React, { FunctionComponent, ReactNode, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import stylesModal from './Modal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
@@ -11,26 +11,33 @@ interface IModalProps {
   header?: string;
 }
 
-const Modal: FunctionComponent<IModalProps> = ({ children, onClose, header = '' }) => {
+const Modal: FunctionComponent<IModalProps> = ({
+  children,
+  onClose,
+  header = '',
+}) => {
   function onOverlayClick() {
     onClose();
   }
 
-  function onPressEsc(evt: KeyboardEvent) {
-    if (evt.key === 'Escape') {
-      evt.preventDefault();
-      onClose();
-    }
-  }
+  const onPressEsc = useCallback(
+    (evt: KeyboardEvent) => {
+      if (evt.key === 'Escape') {
+        evt.preventDefault();
+        onClose();
+      }
+    },
+    [onClose]
+  );
 
   React.useEffect(() => {
     document.addEventListener('keydown', onPressEsc);
     return () => {
       document.removeEventListener('keydown', onPressEsc);
     };
-  }, []);
+  }, [onPressEsc]);
 
-    if (!modalRoot) {
+  if (!modalRoot) {
     return null;
   }
 
@@ -49,6 +56,6 @@ const Modal: FunctionComponent<IModalProps> = ({ children, onClose, header = '' 
     </>,
     modalRoot
   );
-}
+};
 
 export default Modal;

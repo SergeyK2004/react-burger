@@ -46,7 +46,7 @@ function AppHeader() {
             <p className="ml-2">Конструктор</p>
           </Link>
           <Link
-            to="/"
+            to="/feed"
             className={
               (activeNav === 'feed'
                 ? stylesAppHeader.menuItemActive
